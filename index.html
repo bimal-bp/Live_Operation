@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Operations Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 8px 25px rgba(0,0,0,0.08);
+            --primary: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --danger: #ef4444;
+            --orange: #f97316;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .title-bar {
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 16px 24px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(59,130,246,0.5);
+        }
+        .title-bar i { margin-right: 10px; }
+        .container {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 18px;
+            overflow: hidden;
+        }
+        /* Top Row - Machines */
+        .machines {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .mach-box {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 5px solid;
+        }
+        .mach-box:hover { transform: translateY(-6px); }
+        .comp { border-color: #ef4444; }
+        .tipper { border-color: #10b981; }
+        .exc { border-color: #f59e0b; }
+        .load { border-color: #8b5cf6; }
+        .mach-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .mach-label { font-size: 0.95rem; color: var(--text-light); font-weight: 500; }
+        .mach-value { font-size: 2.2rem; font-weight: 700; margin-top: 6px; }
+
+        /* Main Area */
+        .main-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            height: 100%;
+        }
+        .left-stack {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 18px;
+        }
+
+        /* Section Titles with Unique Colors */
+        .quarry-compact h2 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #7c3aed, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .production h2 {
+            font-size: 1.4rem;
+            color: #ea580c; /* Orange-red for Production */
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section h2:nth-of-type(1) { /* Dispatch */
+            color: #dc2626; /* Bright red */
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #fca5a5;
+        }
+        .section h2:nth-of-type(2) { /* Stock */
+            color: #059669; /* Emerald green */
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #86efac;
+        }
+
+        /* Quarry Compact */
+        .quarry-compact {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        .q-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .q-small {
+            padding: 16px 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,249,255,0.7));
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .q-small i { font-size: 2rem; margin-bottom: 8px; }
+        .trips i { color: #3b82f6; }
+        .tonnage i { color: #f97316; }
+        .feeder i { color: #dc2626; }
+        .q-small .label { font-size: 0.9rem; color: var(--text-light); font-weight: 600; }
+        .q-small .value { font-size: 1.8rem; font-weight: 800; margin-top: 4px; }
+
+        /* Production, Dispatch, Stock */
+        .production, .section {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .item {
+            background: #f8fafc;
+            padding: 14px 10px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .item-label { font-size: 0.9rem; color: var(--text-light); }
+        .item-value { font-size: 1.6rem; font-weight: 700; margin-top: 6px; }
+
+        /* Map Section */
+        .map-container {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .map-header {
+            background: linear-gradient(90deg, #0f766e, #14b8a6);
+            color: white;
+            padding: 16px 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .map-header i { margin-right: 10px; }
+        .map-placeholder {
+            flex: 1;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #94a3b8;
+        }
+
+        .right-stack {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .main-area { grid-template-columns: 1fr; }
+            .q-row { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 900px) {
+            .machines, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .q-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="title-bar">
+        <i class="fas fa-tachometer-alt"></i> Live Operations Dashboard
+    </div>
+    <div class="container">
+        <!-- Machines -->
+        <div class="machines">
+            <div class="mach-box comp">
+                <i class="fas fa-compress-arrows-alt mach-icon"></i>
+                <div class="mach-label">Compressors Running</div>
+                <div class="mach-value" id="comp">12</div>
+            </div>
+            <div class="mach-box tipper">
+                <i class="fas fa-truck mach-icon"></i>
+                <div class="mach-label">Tippers Available</div>
+                <div class="mach-value" id="tipper">10/12</div>
+            </div>
+            <div class="mach-box exc">
+                <i class="fas fa-tools mach-icon"></i>
+                <div class="mach-label">Excavators Running</div>
+                <div class="mach-value" id="exc">5/5</div>
+            </div>
+            <div class="mach-box load">
+                <i class="fas fa-truck-loading mach-icon"></i>
+                <div class="mach-label">Loaders Running</div>
+                <div class="mach-value" id="load">2/2</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-area">
+            <!-- Left Column -->
+            <div class="left-stack">
+                <!-- Quarry Operations -->
+                <div class="quarry-compact">
+                    <h2><i class="fas fa-mountain"></i> Quarry Operations</h2>
+                    <div class="q-row">
+                        <div class="q-small trips">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div class="label">Trips Today</div>
+                            <div class="value" id="trips">36</div>
+                        </div>
+                        <div class="q-small tonnage">
+                            <i class="fas fa-weight-hanging"></i>
+                            <div class="label">Boulder Tonnage</div>
+                            <div class="value" id="boulder-today">963</div>
+                        </div>
+                        <div class="q-small feeder">
+                            <i class="fas fa-conveyor-belt"></i>
+                            <div class="label">Feeder to Plant</div>
+                            <div class="value" id="boulder-feeder">1,200</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production -->
+                <div class="production">
+                    <h2><i class="fas fa-cogs"></i> Production Today</h2>
+                    <div class="grid-4">
+                        <div class="item"><div class="item-label">10 mm</div><div class="item-value" id="p10">285</div></div>
+                        <div class="item"><div class="item-label">20 mm</div><div class="item-value" id="p20">312</div></div>
+                        <div class="item"><div class="item-label">River Sand</div><div class="item-value" id="psand">115</div></div>
+                        <div class="item"><div class="item-label">M Sand</div><div class="item-value" id="msand">140</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-stack">
+                <!-- Map Section -->
+                <div class="map-container">
+                    <div class="map-header">
+                        <i class="fas fa-map-marked-alt"></i> Operations Map
+                    </div>
+                    <div class="map-placeholder">
+                        <div style="text-align: center;">
+                            <i class="fas fa-map"></i>
+                            <div>Map area ready for integration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dispatch & Stock -->
+                <div class="section">
+                    <h2><i class="fas fa-truck-moving"></i> Dispatch Today</h2>
+                    <div class="grid-4">
+                        <div class="item"><div class="item-label">10 mm</div><div class="item-value" id="d10">245</div></div>
+                        <div class="item"><div class="item-label">20 mm</div><div class="item-value" id="d20">280</div></div>
+                        <div class="item"><div class="item-label">River Sand</div><div class="item-value" id="dsand">95</div></div>
+                        <div class="item"><div class="item-label">M Sand</div><div class="item-value" id="dmsand">120</div></div>
+                    </div>
+                    
+                    <h2><i class="fas fa-warehouse"></i> Current Stock</h2>
+                    <div class="grid-4">
+                        <div class="item"><div class="item-label">10 mm</div><div class="item-value" id="s10">2,150</div></div>
+                        <div class="item"><div class="item-label">20 mm</div><div class="item-value" id="s20">3,420</div></div>
+                        <div class="item"><div class="item-label">River Sand</div><div class="item-value" id="ssand">1,650</div></div>
+                        <div class="item"><div class="item-label">M Sand</div><div class="item-value" id="smsand">980</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function update() {
+            // Keep machine status fixed as requested
+            document.getElementById('comp').textContent = "12";
+            document.getElementById('tipper').textContent = "10/12";
+            document.getElementById('exc').textContent = "5/5";
+            document.getElementById('load').textContent = "2/2";
+
+            const trips = 30 + rand(0, 20);
+            const boulderToday = 920 + rand(0, 100);
+            const boulderFeeder = 1150 + rand(0, 120);
+            document.getElementById('trips').textContent = trips;
+            document.getElementById('boulder-today').textContent = boulderToday;
+            document.getElementById('boulder-feeder').textContent = boulderFeeder;
+
+            // Production (no "T")
+            document.getElementById('p10').textContent = 270 + rand(0,50);
+            document.getElementById('p20').textContent = 300 + rand(0,50);
+            document.getElementById('psand').textContent = 100 + rand(0,40);
+            document.getElementById('msand').textContent = 130 + rand(0,40);
+
+            // Dispatch
+            document.getElementById('d10').textContent = 230 + rand(0,40);
+            document.getElementById('d20').textContent = 260 + rand(0,50);
+            document.getElementById('dsand').textContent = 85 + rand(0,30);
+            document.getElementById('dmsand').textContent = 110 + rand(0,35);
+
+            // Stock (with thousand separators)
+            document.getElementById('s10').textContent = (2100 + rand(-80,150)).toLocaleString();
+            document.getElementById('s20').textContent = (3350 + rand(-100,200)).toLocaleString();
+            document.getElementById('ssand').textContent = (1600 + rand(-80,150)).toLocaleString();
+            document.getElementById('smsand').textContent = (950 + rand(-70,150)).toLocaleString();
+        }
+        setInterval(update, 5000);
+        update();
+    </script>
+</body> 
+</html>
