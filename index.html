@@ -94,20 +94,15 @@
             margin-bottom: 16px;
             text-align: center;
         }
-        .production h2 {
+        .dispatch h2 {
             font-size: 1.4rem;
-            color: #ea580c; /* Orange-red for Production */
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .section h2:nth-of-type(1) { /* Dispatch */
-            color: #dc2626; /* Bright red */
+            color: #dc2626; /* Bright red for Dispatch */
             text-align: center;
             margin-bottom: 16px;
             padding-bottom: 8px;
             border-bottom: 2px solid #fca5a5;
         }
-        .section h2:nth-of-type(2) { /* Stock */
+        .section h2:nth-of-type(1) { /* Stock */
             color: #059669; /* Emerald green */
             text-align: center;
             margin-bottom: 16px;
@@ -141,8 +136,8 @@
         .q-small .label { font-size: 0.9rem; color: var(--text-light); font-weight: 600; }
         .q-small .value { font-size: 1.8rem; font-weight: 800; margin-top: 4px; }
 
-        /* Production, Dispatch, Stock */
-        .production, .section {
+        /* Dispatch, Stock, and Empty Box */
+        .dispatch, .section, .empty-box {
             background: var(--card);
             border-radius: 16px;
             padding: 20px;
@@ -162,6 +157,25 @@
         }
         .item-label { font-size: 0.9rem; color: var(--text-light); }
         .item-value { font-size: 1.6rem; font-weight: 700; margin-top: 6px; }
+
+        /* Empty Box Styling */
+        .empty-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            text-align: center;
+        }
+        .empty-box i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+        .empty-box p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
 
         /* Map Section */
         .map-container {
@@ -269,15 +283,11 @@
                     </div>
                 </div>
 
-                <!-- Production -->
-                <div class="production">
-                    <h2><i class="fas fa-cogs"></i> Production Today</h2>
-                    <div class="grid-4">
-                        <div class="item"><div class="item-label">10 mm</div><div class="item-value" id="p10">285</div></div>
-                        <div class="item"><div class="item-label">20 mm</div><div class="item-value" id="p20">312</div></div>
-                        <div class="item"><div class="item-label">River Sand</div><div class="item-value" id="psand">115</div></div>
-                        <div class="item"><div class="item-label">M Sand</div><div class="item-value" id="msand">140</div></div>
-                    </div>
+                <!-- Empty Box (replaces Production) -->
+                <div class="empty-box">
+                    <i class="fas fa-cube"></i>
+                    <p>Content Area</p>
+                    <p style="font-size: 0.9rem; margin-top: 8px;">Ready for future content</p>
                 </div>
             </div>
 
@@ -333,12 +343,6 @@
             document.getElementById('trips').textContent = trips;
             document.getElementById('boulder-today').textContent = boulderToday;
             document.getElementById('boulder-feeder').textContent = boulderFeeder;
-
-            // Production (no "T")
-            document.getElementById('p10').textContent = 270 + rand(0,50);
-            document.getElementById('p20').textContent = 300 + rand(0,50);
-            document.getElementById('psand').textContent = 100 + rand(0,40);
-            document.getElementById('msand').textContent = 130 + rand(0,40);
 
             // Dispatch
             document.getElementById('d10').textContent = 230 + rand(0,40);
