@@ -362,10 +362,11 @@
         
         /* NEW: FTD/MTD Reports Side by Side */
         .reports-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             gap: 20px;
             margin-top: 20px;
+            justify-content: center;
+            align-items: flex-start;
         }
         .report-card {
             background: white;
@@ -374,6 +375,8 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            flex: 1;
+            max-width: 50%;
         }
         .report-card:hover {
             transform: translateY(-5px);
@@ -388,8 +391,8 @@
         }
         .report-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
             border-bottom: 1px solid var(--border);
         }
         .report-footer {
@@ -432,10 +435,12 @@
             .map-container { height: 500px; }
         }
         @media (max-width: 900px) {
-            .machines, .boulder-row, .dispatch-grid, .reports-container { grid-template-columns: 1fr; }
+            .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
+            .reports-container { flex-direction: column; }
+            .report-card { max-width: 100%; }
         }
         @media (max-width: 600px) {
-            .machines, .boulder-row, .dispatch-grid, .reports-container { grid-template-columns: 1fr; }
+            .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
             .modal-content { width: 95%; }
             .dispatch-vehicles {
                 flex-direction: column;
