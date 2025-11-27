@@ -429,6 +429,52 @@
             text-align: center;
         }
 
+        /* NEW: Image Gallery Styles */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .image-gallery-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .gallery-header {
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-bottom: 1px solid var(--border);
+        }
+        .gallery-footer {
+            padding: 12px;
+            text-align: center;
+            background: #f8fafc;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
         /* Responsive */
         @media (max-width: 1400px) {
             .main-area { grid-template-columns: 1fr; }
@@ -436,8 +482,11 @@
         }
         @media (max-width: 900px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
-            .reports-container { flex-direction: column; }
-            .report-card { max-width: 100%; }
+            .reports-container, .image-gallery, .image-gallery-2 { 
+                grid-template-columns: 1fr; 
+                flex-direction: column;
+            }
+            .report-card, .gallery-item { max-width: 100%; }
         }
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
@@ -560,7 +609,7 @@
         </div>
     </div>
 
-    <!-- Modal for Feeder to Plant -->
+    <!-- Modal for Feeder to Plant with 3 images -->
     <div id="feeder-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -568,78 +617,28 @@
                 <button class="close-btn" onclick="closeModal('feeder-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="modal-section">
-                    <h3>Report 1: Daily Feeder Performance</h3>
-                    <table class="modal-table">
-                        <thead>
-                            <tr>
-                                <th>Time Period</th>
-                                <th>Material Type</th>
-                                <th>Quantity (Tons)</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>06:00 - 10:00</td>
-                                <td>Boulders</td>
-                                <td>450</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>10:00 - 14:00</td>
-                                <td>Boulders</td>
-                                <td>380</td>
-                                <td>Completed</td>
-                            </tr>
-                            <tr>
-                                <td>14:00 - 18:00</td>
-                                <td>Boulders</td>
-                                <td>327</td>
-                                <td>In Progress</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="modal-section">
-                    <h3>Report 2: Equipment Status</h3>
-                    <table class="modal-table">
-                        <thead>
-                            <tr>
-                                <th>Equipment ID</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Last Maintenance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>FDR-001</td>
-                                <td>Primary Feeder</td>
-                                <td>Operational</td>
-                                <td>2025-11-20</td>
-                            </tr>
-                            <tr>
-                                <td>FDR-002</td>
-                                <td>Secondary Feeder</td>
-                                <td>Operational</td>
-                                <td>2025-11-22</td>
-                            </tr>
-                            <tr>
-                                <td>FDR-003</td>
-                                <td>Backup Feeder</td>
-                                <td>Maintenance</td>
-                                <td>2025-11-25</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="image-gallery">
+                    <div class="gallery-item" onclick="openZoomModal('Live Summary', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.58.37%20PM.jpeg')">
+                        <div class="gallery-header">Live Summary</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.58.37%20PM.jpeg" alt="Live Summary" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
+                    <div class="gallery-item" onclick="openZoomModal('Trip Wise Detail', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.03.45%20PM.jpeg')">
+                        <div class="gallery-header">Trip Wise Detail</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.03.45%20PM.jpeg" alt="Trip Wise Detail" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
+                    <div class="gallery-item" onclick="openZoomModal('Time Difference Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg')">
+                        <div class="gallery-header">Time Difference Report</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg" alt="Time Difference Report" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal for Dispatch Vehicles -->
+    <!-- Modal for Dispatch Vehicles with 2 images -->
     <div id="dispatch-vehicles-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -647,83 +646,17 @@
                 <button class="close-btn" onclick="closeModal('dispatch-vehicles-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="modal-section">
-                    <h3>Active Dispatch Vehicles</h3>
-                    <table class="modal-table">
-                        <thead>
-                            <tr>
-                                <th>Vehicle ID</th>
-                                <th>Driver</th>
-                                <th>Destination</th>
-                                <th>Material</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>TRK-101</td>
-                                <td>Raj Kumar</td>
-                                <td>Site A</td>
-                                <td>10mm Aggregate</td>
-                                <td>En Route</td>
-                            </tr>
-                            <tr>
-                                <td>TRK-102</td>
-                                <td>Mohan Singh</td>
-                                <td>Site B</td>
-                                <td>20mm Aggregate</td>
-                                <td>Loading</td>
-                            </tr>
-                            <tr>
-                                <td>TRK-103</td>
-                                <td>Vikram Patel</td>
-                                <td>Site C</td>
-                                <td>M Sand</td>
-                                <td>En Route</td>
-                            </tr>
-                            <tr>
-                                <td>TRK-104</td>
-                                <td>Anil Sharma</td>
-                                <td>Site D</td>
-                                <td>Rivo Sand</td>
-                                <td>Unloading</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="modal-section">
-                    <h3>Vehicle Availability</h3>
-                    <table class="modal-table">
-                        <thead>
-                            <tr>
-                                <th>Vehicle Type</th>
-                                <th>Total</th>
-                                <th>Available</th>
-                                <th>In Maintenance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>10-Wheeler Tippers</td>
-                                <td>8</td>
-                                <td>6</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>12-Wheeler Tippers</td>
-                                <td>4</td>
-                                <td>3</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>Trailers</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="image-gallery-2">
+                    <div class="gallery-item" onclick="openZoomModal('Vehicle Dispatch Report 1', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-25%20at%209.54.26%20AM.jpeg')">
+                        <div class="gallery-header">Vehicle Dispatch Report 1</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-25%20at%209.54.26%20AM.jpeg" alt="Vehicle Dispatch Report 1" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
+                    <div class="gallery-item" onclick="openZoomModal('Vehicle Dispatch Report 2', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Dispatch%20Vehicle%20wise%20web.png')">
+                        <div class="gallery-header">Vehicle Dispatch Report 2</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Dispatch%20Vehicle%20wise%20web.png" alt="Vehicle Dispatch Report 2" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -738,9 +671,9 @@
             </div>
             <div class="modal-body">
                 <div class="reports-container">
-                    <div class="report-card" onclick="openZoomModal('FTD/MTD Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%209.12.06%20PM%20(1).jpeg')">
+                    <div class="report-card" onclick="openZoomModal('FTD/MTD Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-21%20at%2010.03.10%20AM.jpeg')">
                         <div class="report-header">FTD/MTD Report</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%209.12.06%20PM%20(1).jpeg" alt="FTD/MTD Report" class="report-image">
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-21%20at%2010.03.10%20AM.jpeg" alt="FTD/MTD Report" class="report-image">
                         <div class="report-footer">Click to view in full size</div>
                     </div>
                     <div class="report-card" onclick="openZoomModal('Target Wise Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%208.55.11%20PM.jpeg')">
