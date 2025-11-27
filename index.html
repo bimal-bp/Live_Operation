@@ -118,8 +118,14 @@
             border: 2px solid #fed7aa;
             border-radius: 12px;
             transition: all 0.25s;
+            cursor: pointer;
+            position: relative;
         }
-        .boulder-item:hover { border-color: var(--orange); transform: translateY(-4px); }
+        .boulder-item:hover { 
+            border-color: var(--orange); 
+            transform: translateY(-4px); 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
         .boulder-item i { font-size: 2.4rem; margin-bottom: 12px; opacity: 0.9; }
         .trips i { color: var(--primary); }
         .tonnage i { color: var(--orange); }
@@ -140,8 +146,13 @@
             border: 2px solid #fde68a;
             border-radius: 10px;
             transition: all 0.25s;
+            cursor: pointer;
         }
-        .dispatch-item:hover { border-color: #f59e0b; }
+        .dispatch-item:hover { 
+            border-color: #f59e0b; 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         .dispatch-item .label { font-size: 1rem; color: #92400e; font-weight: 600; }
         .dispatch-item .value { font-size: 2.2rem; font-weight: 700; margin-top: 8px; color: #92400e; }
         
@@ -153,6 +164,13 @@
             border: 2px solid #bae6fd;
             border-radius: 10px;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .dispatch-vehicles:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .dispatch-vehicles .label {
             font-size: 1.1rem;
@@ -196,6 +214,85 @@
             object-fit: contain;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-header {
+            padding: 20px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-section {
+            margin-bottom: 20px;
+        }
+        .modal-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+        }
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .modal-table th, .modal-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+        .modal-table tr:hover {
+            background-color: #f8fafc;
+        }
+
         /* Responsive */
         @media (max-width: 1400px) {
             .main-area { grid-template-columns: 1fr; }
@@ -206,6 +303,7 @@
         }
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; }
         }
     </style>
 </head>
@@ -247,17 +345,17 @@
                     
                     <!-- Boulder Operations Row -->
                     <div class="boulder-row">
-                        <div class="boulder-item trips">
+                        <div class="boulder-item trips" onclick="openModal('trips-modal')">
                             <i class="fas fa-exchange-alt"></i>
                             <div class="label">Trips Today</div>
                             <div class="value" id="trips">49</div>
                         </div>
-                        <div class="boulder-item tonnage">
+                        <div class="boulder-item tonnage" onclick="openModal('tonnage-modal')">
                             <i class="fas fa-weight-hanging"></i>
                             <div class="label">Boulder Tonnage</div>
                             <div class="value" id="boulder-today">1,010</div>
                         </div>
-                        <div class="boulder-item feeder">
+                        <div class="boulder-item feeder" onclick="openModal('feeder-modal')">
                             <i class="fas fa-conveyor-belt"></i>
                             <div class="label">Feeder to Plant</div>
                             <div class="value" id="boulder-feeder">1,157</div>
@@ -266,26 +364,26 @@
 
                     <!-- Dispatch Grid (without the title) -->
                     <div class="dispatch-grid">
-                        <div class="dispatch-item">
+                        <div class="dispatch-item" onclick="openModal('dispatch-10mm-modal')">
                             <div class="label">10 mm</div>
                             <div class="value" id="d10">245</div>
                         </div>
-                        <div class="dispatch-item">
+                        <div class="dispatch-item" onclick="openModal('dispatch-20mm-modal')">
                             <div class="label">20 mm</div>
                             <div class="value" id="d20">280</div>
                         </div>
-                        <div class="dispatch-item">
+                        <div class="dispatch-item" onclick="openModal('dispatch-sand-modal')">
                             <div class="label">Rivo Sand </div>
                             <div class="value" id="dsand">95</div>
                         </div>
-                        <div class="dispatch-item">
+                        <div class="dispatch-item" onclick="openModal('dispatch-msand-modal')">
                             <div class="label">M Sand</div>
                             <div class="value" id="dmsand">120</div>
                         </div>
                     </div>
                     
                     <!-- Dispatch Vehicles -->
-                    <div class="dispatch-vehicles">
+                    <div class="dispatch-vehicles" onclick="openModal('dispatch-vehicles-modal')">
                         <div class="label">Total Vehicles Dispatched</div>
                         <div class="value" id="dispatch-vehicles">15</div>
                     </div>
@@ -300,6 +398,248 @@
                 <div class="map-image">
                     <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png" alt="Live Operations Map">
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Feeder to Plant -->
+    <div id="feeder-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-conveyor-belt"></i> Feeder to Plant Details</h2>
+                <button class="close-btn" onclick="closeModal('feeder-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Report 1: Daily Feeder Performance</h3>
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Time Period</th>
+                                <th>Material Type</th>
+                                <th>Quantity (Tons)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>06:00 - 10:00</td>
+                                <td>Boulders</td>
+                                <td>450</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>10:00 - 14:00</td>
+                                <td>Boulders</td>
+                                <td>380</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>14:00 - 18:00</td>
+                                <td>Boulders</td>
+                                <td>327</td>
+                                <td>In Progress</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Report 2: Equipment Status</h3>
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Equipment ID</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Last Maintenance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FDR-001</td>
+                                <td>Primary Feeder</td>
+                                <td>Operational</td>
+                                <td>2025-11-20</td>
+                            </tr>
+                            <tr>
+                                <td>FDR-002</td>
+                                <td>Secondary Feeder</td>
+                                <td>Operational</td>
+                                <td>2025-11-22</td>
+                            </tr>
+                            <tr>
+                                <td>FDR-003</td>
+                                <td>Backup Feeder</td>
+                                <td>Maintenance</td>
+                                <td>2025-11-25</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Dispatch Vehicles -->
+    <div id="dispatch-vehicles-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-truck"></i> Dispatch Vehicles Details</h2>
+                <button class="close-btn" onclick="closeModal('dispatch-vehicles-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Active Dispatch Vehicles</h3>
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Vehicle ID</th>
+                                <th>Driver</th>
+                                <th>Destination</th>
+                                <th>Material</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TRK-101</td>
+                                <td>Raj Kumar</td>
+                                <td>Site A</td>
+                                <td>10mm Aggregate</td>
+                                <td>En Route</td>
+                            </tr>
+                            <tr>
+                                <td>TRK-102</td>
+                                <td>Mohan Singh</td>
+                                <td>Site B</td>
+                                <td>20mm Aggregate</td>
+                                <td>Loading</td>
+                            </tr>
+                            <tr>
+                                <td>TRK-103</td>
+                                <td>Vikram Patel</td>
+                                <td>Site C</td>
+                                <td>M Sand</td>
+                                <td>En Route</td>
+                            </tr>
+                            <tr>
+                                <td>TRK-104</td>
+                                <td>Anil Sharma</td>
+                                <td>Site D</td>
+                                <td>Rivo Sand</td>
+                                <td>Unloading</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Vehicle Availability</h3>
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Vehicle Type</th>
+                                <th>Total</th>
+                                <th>Available</th>
+                                <th>In Maintenance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10-Wheeler Tippers</td>
+                                <td>8</td>
+                                <td>6</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>12-Wheeler Tippers</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Trailers</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Placeholder modals for other sections -->
+    <div id="trips-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-exchange-alt"></i> Trips Today Details</h2>
+                <button class="close-btn" onclick="closeModal('trips-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed trips information will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tonnage-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-weight-hanging"></i> Boulder Tonnage Details</h2>
+                <button class="close-btn" onclick="closeModal('tonnage-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed boulder tonnage information will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dispatch-10mm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cube"></i> 10mm Dispatch Details</h2>
+                <button class="close-btn" onclick="closeModal('dispatch-10mm-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed 10mm dispatch information will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dispatch-20mm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cube"></i> 20mm Dispatch Details</h2>
+                <button class="close-btn" onclick="closeModal('dispatch-20mm-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed 20mm dispatch information will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dispatch-sand-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cube"></i> Rivo Sand Dispatch Details</h2>
+                <button class="close-btn" onclick="closeModal('dispatch-sand-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed Rivo Sand dispatch information will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dispatch-msand-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cube"></i> M Sand Dispatch Details</h2>
+                <button class="close-btn" onclick="closeModal('dispatch-msand-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Detailed M Sand dispatch information will be displayed here.</p>
             </div>
         </div>
     </div>
@@ -327,6 +667,26 @@
             // Dispatch Vehicles
             document.getElementById('dispatch-vehicles').textContent = 12 + rand(0, 8);
         }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+        
         setInterval(update, 5000);
         update();
     </script>
