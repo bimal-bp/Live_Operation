@@ -118,13 +118,7 @@
             border: 2px solid #fed7aa;
             border-radius: 12px;
             transition: all 0.25s;
-            cursor: pointer;
             position: relative;
-        }
-        .boulder-item:hover { 
-            border-color: var(--orange); 
-            transform: translateY(-4px); 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
         .boulder-item i { font-size: 2.4rem; margin-bottom: 12px; opacity: 0.9; }
         .trips i { color: var(--primary); }
@@ -132,6 +126,12 @@
         .feeder i { color: var(--danger); }
         .boulder-item .label { font-size: 1rem; color: var(--text-light); font-weight: 600; }
         .boulder-item .value { font-size: 2.4rem; font-weight: 800; margin-top: 8px; }
+        .boulder-item .trip-count {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 8px;
+            color: var(--primary);
+        }
 
         /* Dispatch Grid */
         .dispatch-grid {
@@ -146,12 +146,6 @@
             border: 2px solid #fde68a;
             border-radius: 10px;
             transition: all 0.25s;
-            cursor: pointer;
-        }
-        .dispatch-item:hover { 
-            border-color: #f59e0b; 
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .dispatch-item .label { font-size: 1rem; color: #92400e; font-weight: 600; }
         .dispatch-item .value { font-size: 2.2rem; font-weight: 700; margin-top: 8px; color: #92400e; }
@@ -161,7 +155,7 @@
             margin-top: 30px;
             padding: 20px;
             background: #f0f9ff;
-            border: 2px solid #bae6fd;
+            border: 2px solid #0369a1;
             border-radius: 10px;
             text-align: center;
             cursor: pointer;
@@ -182,6 +176,23 @@
             font-size: 2.2rem;
             font-weight: 800;
             color: #0369a1;
+        }
+
+        /* Feeder to Plant - Clickable */
+        .feeder-clickable {
+            cursor: pointer;
+            border: 2px solid #0369a1 !important;
+            animation: pulse 2s infinite;
+        }
+        .feeder-clickable:hover {
+            border-color: #0ea5e9 !important;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(3, 105, 161, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(3, 105, 161, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(3, 105, 161, 0); }
         }
 
         /* Map Section */
@@ -345,38 +356,41 @@
                     
                     <!-- Boulder Operations Row -->
                     <div class="boulder-row">
-                        <div class="boulder-item trips" onclick="openModal('trips-modal')">
+                        <div class="boulder-item trips">
                             <i class="fas fa-exchange-alt"></i>
                             <div class="label">Trips Today</div>
                             <div class="value" id="trips">49</div>
+                            <div class="trip-count" id="trips-count">34 Trips</div>
                         </div>
-                        <div class="boulder-item tonnage" onclick="openModal('tonnage-modal')">
+                        <div class="boulder-item tonnage">
                             <i class="fas fa-weight-hanging"></i>
                             <div class="label">Boulder Tonnage</div>
                             <div class="value" id="boulder-today">1,010</div>
+                            <div class="trip-count" id="tonnage-count">28 Trips</div>
                         </div>
-                        <div class="boulder-item feeder" onclick="openModal('feeder-modal')">
+                        <div class="boulder-item feeder feeder-clickable" onclick="openModal('feeder-modal')">
                             <i class="fas fa-conveyor-belt"></i>
                             <div class="label">Feeder to Plant</div>
                             <div class="value" id="boulder-feeder">1,157</div>
+                            <div class="trip-count" id="feeder-count">42 Trips</div>
                         </div>
                     </div>
 
                     <!-- Dispatch Grid (without the title) -->
                     <div class="dispatch-grid">
-                        <div class="dispatch-item" onclick="openModal('dispatch-10mm-modal')">
+                        <div class="dispatch-item">
                             <div class="label">10 mm</div>
                             <div class="value" id="d10">245</div>
                         </div>
-                        <div class="dispatch-item" onclick="openModal('dispatch-20mm-modal')">
+                        <div class="dispatch-item">
                             <div class="label">20 mm</div>
                             <div class="value" id="d20">280</div>
                         </div>
-                        <div class="dispatch-item" onclick="openModal('dispatch-sand-modal')">
+                        <div class="dispatch-item">
                             <div class="label">Rivo Sand </div>
                             <div class="value" id="dsand">95</div>
                         </div>
-                        <div class="dispatch-item" onclick="openModal('dispatch-msand-modal')">
+                        <div class="dispatch-item">
                             <div class="label">M Sand</div>
                             <div class="value" id="dmsand">120</div>
                         </div>
@@ -571,79 +585,6 @@
         </div>
     </div>
 
-    <!-- Placeholder modals for other sections -->
-    <div id="trips-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-exchange-alt"></i> Trips Today Details</h2>
-                <button class="close-btn" onclick="closeModal('trips-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed trips information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="tonnage-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-weight-hanging"></i> Boulder Tonnage Details</h2>
-                <button class="close-btn" onclick="closeModal('tonnage-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed boulder tonnage information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="dispatch-10mm-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-cube"></i> 10mm Dispatch Details</h2>
-                <button class="close-btn" onclick="closeModal('dispatch-10mm-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed 10mm dispatch information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="dispatch-20mm-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-cube"></i> 20mm Dispatch Details</h2>
-                <button class="close-btn" onclick="closeModal('dispatch-20mm-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed 20mm dispatch information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="dispatch-sand-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-cube"></i> Rivo Sand Dispatch Details</h2>
-                <button class="close-btn" onclick="closeModal('dispatch-sand-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed Rivo Sand dispatch information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="dispatch-msand-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-cube"></i> M Sand Dispatch Details</h2>
-                <button class="close-btn" onclick="closeModal('dispatch-msand-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Detailed M Sand dispatch information will be displayed here.</p>
-            </div>
-        </div>
-    </div>
-
     <script>
         function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
         function update() {
@@ -654,9 +595,17 @@
             document.getElementById('load').textContent = `2/2`;
 
             // Boulder Operations
-            document.getElementById('trips').textContent = 30 + rand(0, 30);
-            document.getElementById('boulder-today').textContent = 950 + rand(0, 150);
-            document.getElementById('boulder-feeder').textContent = (1100 + rand(0, 150)).toLocaleString();
+            const trips = 30 + rand(0, 30);
+            document.getElementById('trips').textContent = trips;
+            document.getElementById('trips-count').textContent = `${trips} Trips`;
+            
+            const tonnage = 950 + rand(0, 150);
+            document.getElementById('boulder-today').textContent = tonnage;
+            document.getElementById('tonnage-count').textContent = `${Math.floor(tonnage/35)} Trips`;
+            
+            const feeder = 1100 + rand(0, 150);
+            document.getElementById('boulder-feeder').textContent = feeder.toLocaleString();
+            document.getElementById('feeder-count').textContent = `${Math.floor(feeder/30)} Trips`;
 
             // Dispatch
             document.getElementById('d10').textContent = 220 + rand(0,50);
