@@ -72,11 +72,37 @@
         }
         .comp { border-top-color: var(--danger); }
         .tipper { border-top-color: var(--success); }
-        .exc { border-top-color: var(--warning); }
-        .load { border-top-color: var(--purple); }
+        .exc-load { border-top-color: var(--warning); }
+        .ftd-mtd { border-top-color: var(--purple); }
         .mach-icon { font-size: 2.4rem; margin-bottom: 10px; opacity: 0.9; }
         .mach-label { font-size: 0.95rem; color: var(--text-light); font-weight: 600; }
         .mach-value { font-size: 2.3rem; font-weight: 700; margin-top: 6px; }
+        
+        /* Combined Excavator/Loader Box */
+        .combined-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .combined-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #fefce8;
+            border-radius: 8px;
+            border-left: 4px solid var(--warning);
+        }
+        .combined-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .combined-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+        }
 
         /* Main Layout */
         .main-area {
@@ -178,13 +204,13 @@
             color: #0369a1;
         }
 
-        /* Feeder to Plant - Clickable */
-        .feeder-clickable {
+        /* Clickable Items */
+        .feeder-clickable, .ftd-mtd-clickable {
             cursor: pointer;
             border: 2px solid #0369a1 !important;
             animation: pulse 2s infinite;
         }
-        .feeder-clickable:hover {
+        .feeder-clickable:hover, .ftd-mtd-clickable:hover {
             border-color: #0ea5e9 !important;
             transform: translateY(-4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
@@ -303,6 +329,23 @@
         .modal-table tr:hover {
             background-color: #f8fafc;
         }
+        
+        /* Image Modal */
+        .image-modal-content {
+            max-width: 95%;
+            max-height: 95%;
+        }
+        .image-modal-body {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-modal-body img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
 
         /* Responsive */
         @media (max-width: 1400px) {
@@ -335,15 +378,24 @@
                 <div class="mach-label">Tippers Available</div>
                 <div class="mach-value" id="tipper">11/12</div>
             </div>
-            <div class="card mach-box exc">
+            <div class="card mach-box exc-load">
                 <i class="fas fa-tools mach-icon"></i>
-                <div class="mach-label">Excavators Running</div>
-                <div class="mach-value" id="exc">5/5</div>
+                <div class="mach-label">Equipment Status</div>
+                <div class="combined-box">
+                    <div class="combined-item">
+                        <span class="combined-label">Excavators Running</span>
+                        <span class="combined-value" id="exc">4/5</span>
+                    </div>
+                    <div class="combined-item">
+                        <span class="combined-label">Loaders Running</span>
+                        <span class="combined-value" id="load">2/2</span>
+                    </div>
+                </div>
             </div>
-            <div class="card mach-box load">
-                <i class="fas fa-truck-loading mach-icon"></i>
-                <div class="mach-label">Loaders Running</div>
-                <div class="mach-value" id="load">2/2</div>
+            <div class="card mach-box ftd-mtd ftd-mtd-clickable" onclick="openModal('ftd-mtd-modal')">
+                <i class="fas fa-chart-line mach-icon"></i>
+                <div class="mach-label">FTD / MTD MIS</div>
+                <div class="mach-value">Reports</div>
             </div>
         </div>
 
@@ -581,6 +633,19 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for FTD/MTD MIS -->
+    <div id="ftd-mtd-modal" class="modal">
+        <div class="modal-content image-modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-chart-line"></i> FTD / MTD MIS Reports</h2>
+                <button class="close-btn" onclick="closeModal('ftd-mtd-modal')">&times;</button>
+            </div>
+            <div class="modal-body image-modal-body">
+                <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png" alt="FTD/MTD MIS Report">
             </div>
         </div>
     </div>
