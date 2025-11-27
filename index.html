@@ -280,7 +280,7 @@
             background-color: white;
             border-radius: 12px;
             width: 90%;
-            max-width: 800px;
+            max-width: 1000px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -352,11 +352,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .image-modal-body img {
             max-width: 100%;
             max-height: 80vh;
             border-radius: 8px;
+        }
+        
+        /* Report Toggle Buttons */
+        .report-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .report-toggle button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .report-toggle button:hover {
+            background-color: #2563eb;
+        }
+        .report-toggle button.active {
+            background-color: var(--purple);
         }
 
         /* Responsive */
@@ -665,7 +690,11 @@
                 <button class="close-btn" onclick="closeModal('ftd-mtd-modal')">&times;</button>
             </div>
             <div class="modal-body image-modal-body">
-                <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png" alt="FTD/MTD MIS Report">
+                <div class="report-toggle">
+                    <button id="report1-btn" class="active" onclick="showReport(1)">FTD/MTD Report</button>
+                    <button id="report2-btn" onclick="showReport(2)">Target Wise Report</button>
+                </div>
+                <img id="report-image" src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%209.12.06%20PM%20(1).jpeg" alt="FTD/MTD MIS Report">
             </div>
         </div>
     </div>
@@ -682,11 +711,9 @@
             // Boulder Operations
             const trips = 30 + rand(0, 30);
             document.getElementById('trips').textContent = trips;
-            document.getElementById('trips-count').textContent = `${trips} Trips`;
             
             const tonnage = 950 + rand(0, 150);
             document.getElementById('boulder-today').textContent = tonnage;
-            document.getElementById('tonnage-count').textContent = `${Math.floor(tonnage/35)} Trips`;
             
             const feeder = 1100 + rand(0, 150);
             document.getElementById('boulder-feeder').textContent = feeder.toLocaleString();
@@ -709,6 +736,25 @@
         
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // FTD/MTD Report Toggle
+        function showReport(reportNumber) {
+            const report1Btn = document.getElementById('report1-btn');
+            const report2Btn = document.getElementById('report2-btn');
+            const reportImage = document.getElementById('report-image');
+            
+            if (reportNumber === 1) {
+                report1Btn.classList.add('active');
+                report2Btn.classList.remove('active');
+                reportImage.src = "https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%209.12.06%20PM%20(1).jpeg";
+                reportImage.alt = "FTD/MTD MIS Report";
+            } else {
+                report1Btn.classList.remove('active');
+                report2Btn.classList.add('active');
+                reportImage.src = "https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%208.55.11%20PM.jpeg";
+                reportImage.alt = "Target Wise Report";
+            }
         }
         
         // Close modal when clicking outside the modal content
