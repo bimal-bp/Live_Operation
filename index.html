@@ -575,7 +575,7 @@
             <div class="card mach-box comp comp-clickable" onclick="openModal('compressor-modal')">
                 <i class="fas fa-compress-arrows-alt mach-icon"></i>
                 <div class="mach-label">Compressors Running</div>
-                <div class="mach-value" id="comp">11</div>
+                <div class="mach-value" id="comp">10</div>
             </div>
             <div class="card mach-box tipper tipper-clickable" onclick="openModal('tipper-modal')">
                 <i class="fas fa-truck mach-icon"></i>
@@ -699,7 +699,7 @@
         </div>
     </div>
 
-    <!-- Modal for Tippers Available -->
+    <!-- Modal for Tippers Available - NOW SHOWS LARGE IMAGE DIRECTLY -->
     <div id="tipper-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -707,12 +707,9 @@
                 <button class="close-btn" onclick="closeModal('tipper-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="image-gallery">
-                    <div class="gallery-item" onclick="openZoomModal('Tippers Available Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.19.28%20AM.jpeg')">
-                        <div class="gallery-header">Tippers Available Report</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.19.28%20AM.jpeg" alt="Tippers Available Report" class="gallery-image">
-                        <div class="gallery-footer">Click to view in full size</div>
-                    </div>
+                <div class="zoom-modal-body">
+                    <div class="report-title">Tippers Available Report</div>
+                    <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.19.28%20AM.jpeg" alt="Tippers Available Report" style="max-width: 100%; max-height: 80vh; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
                 </div>
             </div>
         </div>
@@ -766,18 +763,25 @@
         </div>
     </div>
 
-    <!-- NEW: Modal for Compressor Report -->
+    <!-- UPDATED: Modal for Compressor Report with Mine Boulder Production Dashboard -->
     <div id="compressor-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><i class="fas fa-compress-arrows-alt"></i> Mine Boulder Production Report</h2>
+                <h2><i class="fas fa-compress-arrows-alt"></i> Mine Boulder Production Dashboard</h2>
                 <button class="close-btn" onclick="closeModal('compressor-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="compressor-report">
-                    <h3>Mine Boulder Production</h3>
-                    <div class="compressor-target">Target : 1000 Holes Per Day</div>
-                    <table class="compressor-table">
+                <div class="production-table-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Production Details</h2>
+                        <div class="target-badge">
+                            <span style="background: var(--success); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
+                                Target: 1000 Holes/Day
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <table>
                         <thead>
                             <tr>
                                 <th>Parameter</th>
@@ -786,46 +790,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="highlight">
                                 <td>Blasting Pattern</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr class="highlight">
-                                <td>No of Compressor</td>
-                                <td id="compressor-ftd">0</td>
-                                <td id="compressor-mtd">0</td>
-                            </tr>
-                            <tr class="highlight">
-                                <td>No of Holes</td>
-                                <td id="holes-ftd">0</td>
-                                <td id="holes-mtd">1797</td>
-                            </tr>
-                            <tr class="highlight">
-                                <td>Total Feetage</td>
-                                <td id="feetage-ftd">0</td>
-                                <td id="feetage-mtd">9774</td>
+                                <td colspan="2">Staggered Pattern</td>
                             </tr>
                             <tr>
-                                <td>Boulder Recovery %</td>
-                                <td colspan="2" class="percentage">80%</td>
+                                <td>No of Compressors</td>
+                                <td>69</td>
+                                <td>252</td>
+                            </tr>
+                            <tr>
+                                <td>No of Holes</td>
+                                <td>974</td>
+                                <td>3,874</td>
+                            </tr>
+                            <tr>
+                                <td>Total Feetage</td>
+                                <td>5,299</td>
+                                <td>10,299</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Trial Boulder Recovery %</td>
+                                <td colspan="2">80%</td>
                             </tr>
                             <tr>
                                 <td>Breaking %</td>
-                                <td colspan="2" class="percentage">23.5%</td>
-                            </tr>
-                            <tr>
-                                <td>Blasting</td>
-                                <td colspan="2">NO</td>
+                                <td colspan="2">23.5%</td>
                             </tr>
                             <tr>
                                 <td>No of NMR</td>
-                                <td colspan="2">4</td>
+                                <td>69</td>
+                                <td>252</td>
                             </tr>
                             <tr class="highlight">
                                 <td>Achievement %</td>
-                                <td id="achievement-ftd" class="percentage">0%</td>
-                                <td id="achievement-mtd" class="percentage">179.7%</td>
+                                <td class="achievement-high">97%</td>
+                                <td class="achievement-high">387%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -877,21 +877,6 @@
             
             // Dispatch Vehicles
             document.getElementById('dispatch-vehicles').textContent = 12 + rand(0, 8);
-            
-            // Compressor Report Data
-            document.getElementById('compressor-ftd').textContent = compValue;
-            document.getElementById('compressor-mtd').textContent = compValue;
-            
-            const holesFtd = rand(800, 1200);
-            document.getElementById('holes-ftd').textContent = holesFtd;
-            document.getElementById('holes-mtd').textContent = 1797 + rand(0, 200);
-            
-            const feetageFtd = Math.round(holesFtd * 5.44);
-            document.getElementById('feetage-ftd').textContent = feetageFtd;
-            document.getElementById('feetage-mtd').textContent = 9774 + rand(0, 1000);
-            
-            document.getElementById('achievement-ftd').textContent = Math.round((holesFtd / 1000) * 100) + '%';
-            document.getElementById('achievement-mtd').textContent = '179.7%';
         }
         
         // Modal functions
@@ -921,6 +906,22 @@
                 }
             }
         }
+        
+        // Simple animation for table rows on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('#compressor-modal tbody tr');
+            
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-20px)';
+                
+                setTimeout(() => {
+                    row.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, index * 100);
+            });
+        });
         
         setInterval(update, 5000);
         update();
