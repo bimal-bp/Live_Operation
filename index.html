@@ -217,12 +217,12 @@
         }
 
         /* Clickable Items */
-        .feeder-clickable, .ftd-mtd-clickable, .tipper-clickable {
+        .feeder-clickable, .ftd-mtd-clickable, .tipper-clickable, .comp-clickable {
             cursor: pointer;
             border: 2px solid #0369a1 !important;
             animation: pulse 2s infinite;
         }
-        .feeder-clickable:hover, .ftd-mtd-clickable:hover, .tipper-clickable:hover {
+        .feeder-clickable:hover, .ftd-mtd-clickable:hover, .tipper-clickable:hover, .comp-clickable:hover {
             border-color: #0ea5e9 !important;
             transform: translateY(-4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
@@ -476,6 +476,62 @@
             font-size: 0.9rem;
         }
 
+        /* NEW: Compressor Report Styles */
+        .compressor-report {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 12px;
+            border: 2px solid #f59e0b;
+        }
+        .compressor-report h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #92400e;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .compressor-target {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #92400e;
+            font-weight: 600;
+        }
+        .compressor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .compressor-table th, .compressor-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .compressor-table th {
+            background-color: #f59e0b;
+            color: white;
+            font-weight: 600;
+        }
+        .compressor-table tr:last-child td {
+            border-bottom: none;
+        }
+        .compressor-table tr:hover {
+            background-color: #fefce8;
+        }
+        .compressor-table .highlight {
+            background-color: #fef3c7;
+            font-weight: 600;
+        }
+        .compressor-table .percentage {
+            color: #10b981;
+            font-weight: 600;
+        }
+
         /* Responsive */
         @media (max-width: 1400px) {
             .main-area { grid-template-columns: 1fr; }
@@ -488,6 +544,10 @@
                 flex-direction: column;
             }
             .report-card, .gallery-item { max-width: 100%; }
+            .compressor-table th, .compressor-table td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
         }
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
@@ -512,7 +572,7 @@
     <div class="container">
         <!-- Machines -->
         <div class="machines">
-            <div class="card mach-box comp">
+            <div class="card mach-box comp comp-clickable" onclick="openModal('compressor-modal')">
                 <i class="fas fa-compress-arrows-alt mach-icon"></i>
                 <div class="mach-label">Compressors Running</div>
                 <div class="mach-value" id="comp">11</div>
@@ -706,6 +766,74 @@
         </div>
     </div>
 
+    <!-- NEW: Modal for Compressor Report -->
+    <div id="compressor-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-compress-arrows-alt"></i> Mine Boulder Production Report</h2>
+                <button class="close-btn" onclick="closeModal('compressor-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="compressor-report">
+                    <h3>Mine Boulder Production</h3>
+                    <div class="compressor-target">Target : 1000 Holes Per Day</div>
+                    <table class="compressor-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>FTD</th>
+                                <th>MTD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Blasting Pattern</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>No of Compressor</td>
+                                <td id="compressor-ftd">0</td>
+                                <td id="compressor-mtd">0</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>No of Holes</td>
+                                <td id="holes-ftd">0</td>
+                                <td id="holes-mtd">1797</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Total Feetage</td>
+                                <td id="feetage-ftd">0</td>
+                                <td id="feetage-mtd">9774</td>
+                            </tr>
+                            <tr>
+                                <td>Boulder Recovery %</td>
+                                <td colspan="2" class="percentage">80%</td>
+                            </tr>
+                            <tr>
+                                <td>Breaking %</td>
+                                <td colspan="2" class="percentage">23.5%</td>
+                            </tr>
+                            <tr>
+                                <td>Blasting</td>
+                                <td colspan="2">NO</td>
+                            </tr>
+                            <tr>
+                                <td>No of NMR</td>
+                                <td colspan="2">4</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td>Achievement %</td>
+                                <td id="achievement-ftd" class="percentage">0%</td>
+                                <td id="achievement-mtd" class="percentage">179.7%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- NEW: Zoom Modal for Reports -->
     <div id="zoom-modal" class="modal">
         <div class="modal-content zoom-modal-content">
@@ -724,7 +852,8 @@
         function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
         function update() {
             // Machines
-            document.getElementById('comp').textContent = 10 + rand(0,3);
+            const compValue = 10 + rand(0,3);
+            document.getElementById('comp').textContent = compValue;
             document.getElementById('tipper').textContent = `${8+rand(0,4)}/12`;
             document.getElementById('exc').textContent = `${4+rand(0,1)}/5`;
             document.getElementById('load').textContent = `2/2`;
@@ -748,6 +877,21 @@
             
             // Dispatch Vehicles
             document.getElementById('dispatch-vehicles').textContent = 12 + rand(0, 8);
+            
+            // Compressor Report Data
+            document.getElementById('compressor-ftd').textContent = compValue;
+            document.getElementById('compressor-mtd').textContent = compValue;
+            
+            const holesFtd = rand(800, 1200);
+            document.getElementById('holes-ftd').textContent = holesFtd;
+            document.getElementById('holes-mtd').textContent = 1797 + rand(0, 200);
+            
+            const feetageFtd = Math.round(holesFtd * 5.44);
+            document.getElementById('feetage-ftd').textContent = feetageFtd;
+            document.getElementById('feetage-mtd').textContent = 9774 + rand(0, 1000);
+            
+            document.getElementById('achievement-ftd').textContent = Math.round((holesFtd / 1000) * 100) + '%';
+            document.getElementById('achievement-mtd').textContent = '179.7%';
         }
         
         // Modal functions
