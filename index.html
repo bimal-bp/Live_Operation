@@ -217,12 +217,12 @@
         }
 
         /* Clickable Items */
-        .feeder-clickable, .ftd-mtd-clickable {
+        .feeder-clickable, .ftd-mtd-clickable, .tipper-clickable {
             cursor: pointer;
             border: 2px solid #0369a1 !important;
             animation: pulse 2s infinite;
         }
-        .feeder-clickable:hover, .ftd-mtd-clickable:hover {
+        .feeder-clickable:hover, .ftd-mtd-clickable:hover, .tipper-clickable:hover {
             border-color: #0ea5e9 !important;
             transform: translateY(-4px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
@@ -240,6 +240,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
         .map-header {
             background: #1e293b;
@@ -516,7 +517,7 @@
                 <div class="mach-label">Compressors Running</div>
                 <div class="mach-value" id="comp">11</div>
             </div>
-            <div class="card mach-box tipper">
+            <div class="card mach-box tipper tipper-clickable" onclick="openModal('tipper-modal')">
                 <i class="fas fa-truck mach-icon"></i>
                 <div class="mach-label">Tippers Available</div>
                 <div class="mach-value" id="tipper">11/12</div>
@@ -598,7 +599,7 @@
             </div>
 
             <!-- Right: Map -->
-            <div class="card map-container">
+            <div class="card map-container" onclick="openZoomModal('Live Operations Map', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png')">
                 <div class="map-header">
                     <i class="fas fa-map-marked-alt"></i> Live Operations Map
                 </div>
@@ -623,14 +624,33 @@
                         <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.58.37%20PM.jpeg" alt="Live Summary" class="gallery-image">
                         <div class="gallery-footer">Click to view in full size</div>
                     </div>
-                    <div class="gallery-item" onclick="openZoomModal('Trip Wise Detail', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.03.45%20PM.jpeg')">
+                    <div class="gallery-item" onclick="openZoomModal('Trip Wise Detail', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/vehciletrip%20wise%20.jpg')">
                         <div class="gallery-header">Trip Wise Detail</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.03.45%20PM.jpeg" alt="Trip Wise Detail" class="gallery-image">
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/vehciletrip%20wise%20.jpg" alt="Trip Wise Detail" class="gallery-image">
                         <div class="gallery-footer">Click to view in full size</div>
                     </div>
                     <div class="gallery-item" onclick="openZoomModal('Time Difference Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg')">
                         <div class="gallery-header">Time Difference Report</div>
                         <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg" alt="Time Difference Report" class="gallery-image">
+                        <div class="gallery-footer">Click to view in full size</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Tippers Available -->
+    <div id="tipper-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-truck"></i> Tippers Available Details</h2>
+                <button class="close-btn" onclick="closeModal('tipper-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="image-gallery">
+                    <div class="gallery-item" onclick="openZoomModal('Tippers Available Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.19.28%20AM.jpeg')">
+                        <div class="gallery-header">Tippers Available Report</div>
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.19.28%20AM.jpeg" alt="Tippers Available Report" class="gallery-image">
                         <div class="gallery-footer">Click to view in full size</div>
                     </div>
                 </div>
