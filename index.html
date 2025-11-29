@@ -33,17 +33,30 @@
             --radius: 12px;
             --transition: all 0.3s ease;
         }
+
+        /* Dark Mode Variables */
+        .dark-mode {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --card-hover: #334155;
+            --text: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: #334155;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
         
         * { margin:0; padding:0; box-sizing:border-box; }
         
         body {
             height: 100vh;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, var(--bg) 0%, var(--border) 100%);
             color: var(--text);
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            transition: var(--transition);
         }
         
         /* Modern Header */
@@ -80,6 +93,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        
+        /* Date and Time Display */
+        .datetime-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            margin: 0 15px;
+        }
+        
+        .date-display {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .time-display {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(15deg);
         }
         
         .container {
@@ -1001,6 +1059,10 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .datetime-display {
+                margin: 10px 0;
+            }
         }
         
         @media (max-width: 600px) {
@@ -1024,11 +1086,22 @@
         <div>
             <i class="fas fa-tachometer-alt"></i> Live Operations Dashboard
         </div>
+        
+        <!-- Date and Time Display -->
+        <div class="datetime-display">
+            <div class="date-display" id="current-date">Loading date...</div>
+            <div class="time-display" id="current-time">Loading time...</div>
+        </div>
+        
         <div class="user-info">
             <div class="user-avatar">
                 <i class="fas fa-user"></i>
             </div>
             <div>Operations Manager</div>
+            <!-- Dark Mode Toggle -->
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </div>
     
@@ -1578,8 +1651,62 @@
             });
         });
         
+        // Date and Time Update Function
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Format date
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('en-US', options);
+            
+            // Format time
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            
+            // Update DOM
+            document.getElementById('current-date').textContent = dateString;
+            document.getElementById('current-time').textContent = timeString;
+        }
+        
+        // Dark Mode Toggle Function
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Check for saved dark mode preference
+        function checkDarkModePreference() {
+            const darkMode = localStorage.getItem('darkMode');
+            const themeToggle = document.getElementById('theme-toggle');
+            const icon = themeToggle.querySelector('i');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+        
+        // Initialize
         setInterval(update, 5000);
         update();
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        
+        document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
+        checkDarkModePreference();
     </script>
 </body>
 </html>
