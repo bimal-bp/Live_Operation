@@ -55,7 +55,7 @@
             flex: 1;
             padding: 20px;
             display: grid;
-            grid-template-rows: auto 1fr;
+            grid-template-rows: auto auto 1fr;
             gap: 18px;
             overflow: hidden;
         }
@@ -729,10 +729,161 @@
             font-weight: 600;
         }
 
+        /* NEW: Production & Stock Section Styles */
+        .production-stock-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .plant-details {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 18px;
+        }
+        .plant-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .plant-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .plant-info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+        .plant-info-item .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .plant-info-item .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .plant-info-item .sub-value {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+        .cctv-container {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+        .cctv-header {
+            background: linear-gradient(90deg, #1e293b, #334155);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        .cctv-image {
+            flex: 1;
+            background-color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .cctv-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .cctv-container:hover .cctv-image img {
+            transform: scale(1.02);
+        }
+        .production-stock-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+        .product-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        .product-name {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .product-production {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+        .product-stock {
+            font-size: 1rem;
+            color: var(--success-light);
+            font-weight: 600;
+        }
+        .product-stock.low {
+            color: var(--danger-light);
+        }
+        .product-stock.medium {
+            color: var(--warning-light);
+        }
+
         /* Responsive */
         @media (max-width: 1400px) {
             .main-area { grid-template-columns: 1fr; }
             .map-container { height: 500px; }
+            .production-stock-section { grid-template-columns: 1fr; }
+            .production-stock-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 900px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
@@ -749,6 +900,8 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .plant-info { grid-template-columns: 1fr; }
+            .production-stock-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
@@ -763,6 +916,7 @@
             .dispatch-vehicles .value {
                 font-size: 2rem;
             }
+            .production-stock-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -799,6 +953,98 @@
                 <i class="fas fa-chart-line mach-icon"></i>
                 <div class="mach-label">FTD / MTD MIS</div>
                 <div class="mach-value">Reports</div>
+            </div>
+        </div>
+
+        <!-- NEW: Production & Stock Section -->
+        <div class="card production-stock-section">
+            <div class="plant-details">
+                <div class="card">
+                    <h2 class="section-title"><i class="fas fa-industry"></i> Plant Details</h2>
+                    <div class="plant-info">
+                        <div class="plant-info-item">
+                            <div class="label">FTD Production</div>
+                            <div class="value" id="ftd-production">1,250</div>
+                            <div class="sub-value">Tons</div>
+                        </div>
+                        <div class="plant-info-item">
+                            <div class="label">MTD Production</div>
+                            <div class="value" id="mtd-production">28,450</div>
+                            <div class="sub-value">Tons</div>
+                        </div>
+                        <div class="plant-info-item">
+                            <div class="label">Plant Efficiency</div>
+                            <div class="value" id="plant-efficiency">92%</div>
+                            <div class="sub-value">Current Shift</div>
+                        </div>
+                        <div class="plant-info-item">
+                            <div class="label">Running Hours</div>
+                            <div class="value" id="running-hours">18.5</div>
+                            <div class="sub-value">Hours Today</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card cctv-container">
+                    <div class="cctv-header">
+                        <i class="fas fa-video"></i> Plant CCTV Footage
+                    </div>
+                    <div class="cctv-image">
+                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png" alt="Plant CCTV Footage">
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="section-title"><i class="fas fa-boxes"></i> Production & Stock Details</h2>
+                <div class="production-stock-grid">
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--primary);"></i>
+                        <div class="product-name">10 MM</div>
+                        <div class="product-production" id="prod-10mm">245</div>
+                        <div class="product-stock" id="stock-10mm">1,250</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--success);"></i>
+                        <div class="product-name">20 MM</div>
+                        <div class="product-production" id="prod-20mm">280</div>
+                        <div class="product-stock" id="stock-20mm">980</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--warning);"></i>
+                        <div class="product-name">V-Sand</div>
+                        <div class="product-production" id="prod-vsand">180</div>
+                        <div class="product-stock medium" id="stock-vsand">450</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--danger);"></i>
+                        <div class="product-name">Railway Ballast</div>
+                        <div class="product-production" id="prod-ballast">320</div>
+                        <div class="product-stock" id="stock-ballast">1,850</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--purple);"></i>
+                        <div class="product-name">40 MM</div>
+                        <div class="product-production" id="prod-40mm">195</div>
+                        <div class="product-stock" id="stock-40mm">1,100</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--teal);"></i>
+                        <div class="product-name">Rivo Sand</div>
+                        <div class="product-production" id="prod-rivosand">95</div>
+                        <div class="product-stock low" id="stock-rivosand">180</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--orange);"></i>
+                        <div class="product-name">M Sand</div>
+                        <div class="product-production" id="prod-msand">120</div>
+                        <div class="product-stock" id="stock-msand">750</div>
+                    </div>
+                    <div class="product-item">
+                        <i class="fas fa-cube product-icon" style="color: var(--text-light);"></i>
+                        <div class="product-name">Slurry</div>
+                        <div class="product-production" id="prod-slurry">85</div>
+                        <div class="product-stock" id="stock-slurry">420</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1076,6 +1322,32 @@
             
             // Dispatch Vehicles
             document.getElementById('dispatch-vehicles').textContent = 12 + rand(0, 8);
+            
+            // NEW: Production & Stock Updates
+            document.getElementById('ftd-production').textContent = (1200 + rand(0, 100)).toLocaleString();
+            document.getElementById('mtd-production').textContent = (28000 + rand(0, 1000)).toLocaleString();
+            document.getElementById('plant-efficiency').textContent = `${90 + rand(0, 8)}%`;
+            document.getElementById('running-hours').textContent = (18 + rand(0, 2) / 2).toFixed(1);
+            
+            // Product Production & Stock
+            document.getElementById('prod-10mm').textContent = 220 + rand(0,50);
+            document.getElementById('prod-20mm').textContent = 260 + rand(0,60);
+            document.getElementById('prod-vsand').textContent = 160 + rand(0,40);
+            document.getElementById('prod-ballast').textContent = 300 + rand(0,40);
+            document.getElementById('prod-40mm').textContent = 180 + rand(0,30);
+            document.getElementById('prod-rivosand').textContent = 80 + rand(0,30);
+            document.getElementById('prod-msand').textContent = 100 + rand(0,40);
+            document.getElementById('prod-slurry').textContent = 70 + rand(0,30);
+            
+            // Update stock levels with some variation
+            document.getElementById('stock-10mm').textContent = (1200 + rand(-50, 50)).toLocaleString();
+            document.getElementById('stock-20mm').textContent = (950 + rand(-50, 50)).toLocaleString();
+            document.getElementById('stock-vsand').textContent = (450 + rand(-30, 30)).toLocaleString();
+            document.getElementById('stock-ballast').textContent = (1800 + rand(-100, 100)).toLocaleString();
+            document.getElementById('stock-40mm').textContent = (1050 + rand(-50, 50)).toLocaleString();
+            document.getElementById('stock-rivosand').textContent = (180 + rand(-20, 20)).toLocaleString();
+            document.getElementById('stock-msand').textContent = (700 + rand(-50, 50)).toLocaleString();
+            document.getElementById('stock-slurry').textContent = (400 + rand(-30, 30)).toLocaleString();
         }
         
         // Modal functions
