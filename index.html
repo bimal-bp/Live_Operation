@@ -957,60 +957,6 @@
             font-weight: 700;
         }
 
-        /* NEW: CCTV Button */
-        .cctv-button {
-            margin-top: 20px;
-            padding: 24px 16px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            border: none;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        .cctv-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .cctv-button:hover::before {
-            left: 100%;
-        }
-        .cctv-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-        }
-        .cctv-button .label {
-            font-size: 1.3rem;
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0;
-        }
-        .cctv-button .value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .cctv-button i {
-            font-size: 2.2rem;
-            color: white;
-            opacity: 0.9;
-        }
-
         /* NEW: Cashflow Report Styles */
         .cashflow-container {
             margin-top: 20px;
@@ -1109,14 +1055,14 @@
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
             .modal-content { width: 95%; }
-            .dispatch-vehicles, .production-stock, .cctv-button {
+            .dispatch-vehicles, .production-stock {
                 flex-direction: column;
                 gap: 12px;
             }
-            .dispatch-vehicles .label, .production-stock .label, .cctv-button .label {
+            .dispatch-vehicles .label, .production-stock .label {
                 font-size: 1.1rem;
             }
-            .dispatch-vehicles .value, .production-stock .value, .cctv-button .value {
+            .dispatch-vehicles .value, .production-stock .value {
                 font-size: 2rem;
             }
         }
@@ -1221,8 +1167,8 @@
                         </div>
                         <div class="value">Details</div>
                     </div>
-                    
-                    
+                </div>
+            </div>
 
             <!-- Right: Map -->
             <div class="card map-container" onclick="openZoomModal('Live Operations Map', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Screenshot%202025-11-27%20081917.png')">
@@ -1327,7 +1273,7 @@
                 </div>
                 
                 <!-- NEW: Cashflow Report Button -->
-                <div class="cctv-button" onclick="openModal('cashflow-modal')" style="margin-top: 30px;">
+                <div class="production-stock" onclick="openModal('cashflow-modal')" style="margin-top: 30px;">
                     <div class="label">
                         <i class="fas fa-money-bill-wave"></i> Cashflow Report
                     </div>
@@ -1596,55 +1542,6 @@
         </div>
     </div>
 
-    <!-- NEW: Modal for CCTV Footage -->
-    <div id="cctv-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-video"></i> Plant CCTV Footage</h2>
-                <button class="close-btn" onclick="closeModal('cctv-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <h3 style="color: var(--primary); margin-bottom: 10px;">Live Plant CCTV Feed</h3>
-                    <p style="color: var(--text-light);">Real-time monitoring of plant operations</p>
-                </div>
-                
-                <!-- CCTV Video Player -->
-                <div style="background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 20px;">
-                    <video id="cctv-video" width="100%" height="auto" controls style="display: block;">
-                        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                
-                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                    <button class="action-btn" onclick="playVideo()">
-                        <i class="fas fa-play"></i> Play
-                    </button>
-                    <button class="action-btn" onclick="pauseVideo()" style="background: var(--warning);">
-                        <i class="fas fa-pause"></i> Pause
-                    </button>
-                    <button class="action-btn" onclick="stopVideo()" style="background: var(--danger);">
-                        <i class="fas fa-stop"></i> Stop
-                    </button>
-                    <button class="action-btn" onclick="fullscreenVideo()" style="background: var(--success);">
-                        <i class="fas fa-expand"></i> Fullscreen
-                    </button>
-                </div>
-                
-                <div style="margin-top: 20px; padding: 15px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">Camera Locations</h4>
-                    <ul style="list-style-type: none; padding-left: 0;">
-                        <li style="margin-bottom: 8px;"><i class="fas fa-camera" style="color: var(--primary); margin-right: 8px;"></i> Primary Crusher Area</li>
-                        <li style="margin-bottom: 8px;"><i class="fas fa-camera" style="color: var(--primary); margin-right: 8px;"></i> Secondary Crusher Area</li>
-                        <li style="margin-bottom: 8px;"><i class="fas fa-camera" style="color: var(--primary); margin-right: 8px;"></i> Screening Plant</li>
-                        <li style="margin-bottom: 8px;"><i class="fas fa-camera" style="color: var(--primary); margin-right: 8px;"></i> Loading Bay</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- NEW: Modal for Cashflow Report -->
     <div id="cashflow-modal" class="modal">
         <div class="modal-content">
@@ -1851,36 +1748,6 @@
             document.getElementById('zoom-report-image').src = imageSrc;
             document.getElementById('zoom-report-image').alt = title;
             openModal('zoom-modal');
-        }
-        
-        // CCTV Video Controls
-        function playVideo() {
-            const video = document.getElementById('cctv-video');
-            video.play();
-        }
-        
-        function pauseVideo() {
-            const video = document.getElementById('cctv-video');
-            video.pause();
-        }
-        
-        function stopVideo() {
-            const video = document.getElementById('cctv-video');
-            video.pause();
-            video.currentTime = 0;
-        }
-        
-        function fullscreenVideo() {
-            const video = document.getElementById('cctv-video');
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) { /* Firefox */
-                video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) { /* IE/Edge */
-                video.msRequestFullscreen();
-            }
         }
         
         // Close modal when clicking outside the modal content
