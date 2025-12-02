@@ -117,7 +117,7 @@
         .ftd-mtd { border-top-color: var(--purple); }
         .mach-icon { 
             font-size: 2.4rem; 
-            margin-bottom: 10px; 
+            margin-bottom: 8px; 
             opacity: 0.9; 
             background: linear-gradient(135deg, currentColor, rgba(59, 130, 246, 0.7));
             -webkit-background-clip: text;
@@ -133,10 +133,40 @@
         .mach-value { 
             font-size: 2.3rem; 
             font-weight: 700; 
-            margin-top: 6px; 
+            margin-top: 4px; 
             background: linear-gradient(135deg, var(--text), var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        
+        /* UPDATED: Compressor details section */
+        .compressor-details {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.3;
+            padding: 0 5px;
+        }
+        .compressor-details .holes {
+            color: var(--danger);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .compressor-details .feets {
+            color: var(--warning);
+            font-weight: 600;
+        }
+        
+        /* Feeder count in compressor box */
+        .feeder-count {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
         }
         
         /* Combined Excavator/Loader Box */
@@ -1051,6 +1081,10 @@
             .production-stock-grid { grid-template-columns: 1fr; }
             .cashflow-cards { justify-content: center; }
             .cashflow-card { width: 100%; max-width: 300px; }
+            .compressor-details {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
         }
         @media (max-width: 600px) {
             .machines, .boulder-row, .dispatch-grid { grid-template-columns: 1fr; }
@@ -1065,6 +1099,12 @@
             .dispatch-vehicles .value, .production-stock .value {
                 font-size: 2rem;
             }
+            .compressor-details {
+                font-size: 0.75rem;
+            }
+            .mach-value {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -1076,10 +1116,15 @@
     <div class="container">
         <!-- Machines -->
         <div class="machines">
+            <!-- UPDATED: Compressors Running box with additional details -->
             <div class="card mach-box comp comp-clickable" onclick="openModal('compressor-modal')">
                 <i class="fas fa-compress-arrows-alt mach-icon"></i>
                 <div class="mach-label">Compressors Running</div>
                 <div class="mach-value" id="comp">10</div>
+                <div class="compressor-details">
+                    <div class="holes">546 holes</div>
+                    <div class="feets">3,015 feets</div>
+                </div>
             </div>
             <div class="card mach-box tipper tipper-clickable" onclick="openModal('tipper-modal')">
                 <i class="fas fa-truck mach-icon"></i>
@@ -1687,12 +1732,22 @@
     <script>
         function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
         function update() {
-            // Machines
+            // Machines - Updated with holes and feets
             const compValue = 10 + rand(0,3);
             document.getElementById('comp').textContent = compValue;
+            
+            // Update holes and feets values
+            const holes = 546 + rand(-20, 20);
+            const feets = 3015 + rand(-100, 100);
+            document.querySelector('.compressor-details .holes').textContent = `${holes} holes`;
+            document.querySelector('.compressor-details .feets').textContent = `${feets.toLocaleString()} feets`;
+            
             document.getElementById('tipper').textContent = `${8+rand(0,4)}/12`;
             document.getElementById('exc').textContent = `${4+rand(0,1)}/5`;
             document.getElementById('load').textContent = `2/2`;
+
+            // Update feeder count in compressor box
+            document.getElementById('comp-feeder-count').textContent = `1,${113 + rand(-10, 10)}`;
 
             // Boulder Operations
             const trips = 30 + rand(0, 30);
