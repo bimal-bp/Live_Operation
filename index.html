@@ -2243,108 +2243,203 @@
                 <button class="close-btn" onclick="closeModal('excavator-loader-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="equipment-report">
-                    <h3>Equipment Working Status</h3>
-                    <table class="equipment-table">
-                        <thead>
-                            <tr>
-                                <th>Equipment ID</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Running Hours</th>
-                                <th>Operator</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>EXC-001</td>
-                                <td>Excavator</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>8.2 hrs</td>
-                                <td>Rajesh</td>
-                                <td>Normal operation</td>
-                            </tr>
-                            <tr>
-                                <td>EXC-002</td>
-                                <td>Excavator</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>7.8 hrs</td>
-                                <td>Mohan</td>
-                                <td>Loading boulders</td>
-                            </tr>
-                            <tr>
-                                <td>EXC-003</td>
-                                <td>Excavator</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>6.5 hrs</td>
-                                <td>Sanjay</td>
-                                <td>Feeding crusher</td>
-                            </tr>
-                            <tr>
-                                <td>EXC-004</td>
-                                <td>Excavator</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>5.9 hrs</td>
-                                <td>Vikram</td>
-                                <td>Site excavation</td>
-                            </tr>
-                            <tr>
-                                <td>EXC-005</td>
-                                <td>Excavator</td>
-                                <td><span style="color: var(--danger); font-weight: 600;">Maintenance</span></td>
-                                <td>0 hrs</td>
-                                <td>-</td>
-                                <td>Hydraulic repair</td>
-                            </tr>
-                            <tr>
-                                <td>LDR-001</td>
-                                <td>Loader</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>9.1 hrs</td>
-                                <td>Amit</td>
-                                <td>Stockyard operation</td>
-                            </tr>
-                            <tr>
-                                <td>LDR-002</td>
-                                <td>Loader</td>
-                                <td><span style="color: var(--success); font-weight: 600;">Running</span></td>
-                                <td>8.7 hrs</td>
-                                <td>Ravi</td>
-                                <td>Feeding plant</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- Simplified Equipment Team Summary -->
-                <div class="team-summary">
-                    <h3><i class="fas fa-hard-hat"></i> Equipment Operators - Today's Status</h3>
-                    <div class="team-list">
-                        <div class="team-member">
-                            <span class="status-dot status-present"></span>
-                            <div>
-                                <div class="team-member-name">Operators</div>
-                                <div class="team-member-role">6/7 Present</div>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <span class="status-dot status-present"></span>
-                            <div>
-                                <div class="team-member-name">Equipment</div>
-                                <div class="team-member-role">6/7 Operational</div>
-                            </div>
-                        </div>
-                        <div class="team-member">
-                            <span class="status-dot status-absent"></span>
-                            <div>
-                                <div class="team-member-name">Excavator-5</div>
-                                <div class="team-member-role">Under Maintenance</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="equipment-report">
+        <div class="report-header">
+            <h3>Equipment Working Status</h3>
+        </div>
+        
+        <table class="equipment-table">
+            <thead>
+                <tr>
+                    <th>Equipment ID</th>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                    <th>Daily (hrs)</th>
+                    <th>MTD (hrs)</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EXC-001</td>
+                    <td>Excavator</td>
+                    <td><span class="purpose-tag">L</span></td>
+                    <td>8.2</td>
+                    <td>124.5</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>EXC-002</td>
+                    <td>Excavator</td>
+                    <td><span class="purpose-tag">L</span></td>
+                    <td>7.8</td>
+                    <td>118.2</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>EXC-003</td>
+                    <td>Excavator</td>
+                    <td><span class="purpose-tag">B</span></td>
+                    <td>6.5</td>
+                    <td>97.5</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>EXC-004</td>
+                    <td>Excavator</td>
+                    <td><span class="purpose-tag">D</span></td>
+                    <td>5.9</td>
+                    <td>88.7</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>EXC-005</td>
+                    <td>Excavator</td>
+                    <td><span class="purpose-tag">B</span></td>
+                    <td>0</td>
+                    <td>102.3</td>
+                    <td><span class="status maintenance">Maintenance</span></td>
+                    <td>Hydraulic repair</td>
+                </tr>
+                <tr>
+                    <td>LDR-001</td>
+                    <td>Loader</td>
+                    <td><span class="purpose-tag">L</span></td>
+                    <td>9.1</td>
+                    <td>136.5</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>LDR-002</td>
+                    <td>Loader</td>
+                    <td><span class="purpose-tag">L</span></td>
+                    <td>8.7</td>
+                    <td>130.8</td>
+                    <td><span class="status running">Running</span></td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="table-footer">
+            <div class="purpose-key">
+                <strong>Purpose:</strong> L=Loading, D=Development, B=Breaking
             </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.modal-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.equipment-report {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.report-header {
+    padding: 15px 20px;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.report-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.equipment-table thead {
+    background-color: #f1f5f9;
+}
+
+.equipment-table th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.equipment-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.equipment-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.purpose-tag {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.85rem;
+}
+
+.purpose-tag[title="D"] {
+    background-color: #9b59b6;
+}
+
+.purpose-tag[title="B"] {
+    background-color: #e67e22;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status.running {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+.status.maintenance {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.table-footer {
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eaeaea;
+    font-size: 0.9rem;
+}
+
+.purpose-key {
+    color: #666;
+}
+</style>
+                
+            
+                  
         </div>
     </div>
 
