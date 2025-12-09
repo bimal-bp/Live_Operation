@@ -2236,13 +2236,7 @@
     </div>
 
     <!-- Modal for Excavators and Loaders -->
-    <div id="excavator-loader-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-hard-hat"></i> Excavators & Loaders Report</h2>
-                <button class="close-btn" onclick="closeModal('excavator-loader-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
+    <div class="modal-body">
     <div class="equipment-report">
         <div class="report-header">
             <h3>Equipment Working Status</h3>
@@ -2264,7 +2258,7 @@
                 <tr>
                     <td>EXC-001</td>
                     <td>Excavator</td>
-                    <td><span class="purpose-tag">L</span></td>
+                    <td><span class="purpose-tag loading">L</span></td>
                     <td>8.2</td>
                     <td>124.5</td>
                     <td><span class="status running">Running</span></td>
@@ -2273,7 +2267,7 @@
                 <tr>
                     <td>EXC-002</td>
                     <td>Excavator</td>
-                    <td><span class="purpose-tag">L</span></td>
+                    <td><span class="purpose-tag loading">L</span></td>
                     <td>7.8</td>
                     <td>118.2</td>
                     <td><span class="status running">Running</span></td>
@@ -2282,7 +2276,7 @@
                 <tr>
                     <td>EXC-003</td>
                     <td>Excavator</td>
-                    <td><span class="purpose-tag">B</span></td>
+                    <td><span class="purpose-tag breaking">B</span></td>
                     <td>6.5</td>
                     <td>97.5</td>
                     <td><span class="status running">Running</span></td>
@@ -2291,7 +2285,7 @@
                 <tr>
                     <td>EXC-004</td>
                     <td>Excavator</td>
-                    <td><span class="purpose-tag">D</span></td>
+                    <td><span class="purpose-tag development">D</span></td>
                     <td>5.9</td>
                     <td>88.7</td>
                     <td><span class="status running">Running</span></td>
@@ -2300,7 +2294,7 @@
                 <tr>
                     <td>EXC-005</td>
                     <td>Excavator</td>
-                    <td><span class="purpose-tag">B</span></td>
+                    <td><span class="purpose-tag breaking">B</span></td>
                     <td>0</td>
                     <td>102.3</td>
                     <td><span class="status maintenance">Maintenance</span></td>
@@ -2309,7 +2303,7 @@
                 <tr>
                     <td>LDR-001</td>
                     <td>Loader</td>
-                    <td><span class="purpose-tag">L</span></td>
+                    <td><span class="purpose-tag loading">L</span></td>
                     <td>9.1</td>
                     <td>136.5</td>
                     <td><span class="status running">Running</span></td>
@@ -2318,7 +2312,7 @@
                 <tr>
                     <td>LDR-002</td>
                     <td>Loader</td>
-                    <td><span class="purpose-tag">L</span></td>
+                    <td><span class="purpose-tag loading">L</span></td>
                     <td>8.7</td>
                     <td>130.8</td>
                     <td><span class="status running">Running</span></td>
@@ -2329,7 +2323,9 @@
         
         <div class="table-footer">
             <div class="purpose-key">
-                <strong>Purpose:</strong> L=Loading, D=Development, B=Breaking
+                <span class="key-item"><span class="key-color loading"></span>L = Loading</span>
+                <span class="key-item"><span class="key-color development"></span>D = Development</span>
+                <span class="key-item"><span class="key-color breaking"></span>B = Breaking</span>
             </div>
         </div>
     </div>
@@ -2381,35 +2377,45 @@
 .equipment-table td {
     padding: 10px;
     border-bottom: 1px solid #eaeaea;
+    vertical-align: middle;
 }
 
 .equipment-table tbody tr:hover {
     background-color: #f8fafc;
 }
 
+/* Purpose Tags with Different Colors */
 .purpose-tag {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    background-color: #3498db;
     color: white;
     font-weight: bold;
     text-align: center;
-    line-height: 24px;
-    font-size: 0.85rem;
+    line-height: 28px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.purpose-tag[title="D"] {
-    background-color: #9b59b6;
+.purpose-tag.loading {
+    background-color: #3498db; /* Blue for Loading */
+    border: 2px solid #2980b9;
 }
 
-.purpose-tag[title="B"] {
-    background-color: #e67e22;
+.purpose-tag.development {
+    background-color: #9b59b6; /* Purple for Development */
+    border: 2px solid #8e44ad;
 }
 
+.purpose-tag.breaking {
+    background-color: #e67e22; /* Orange for Breaking */
+    border: 2px solid #d35400;
+}
+
+/* Status Badges */
 .status {
-    padding: 4px 8px;
+    padding: 6px 12px;
     border-radius: 4px;
     font-size: 0.85rem;
     font-weight: 600;
@@ -2417,31 +2423,73 @@
 }
 
 .status.running {
-    background-color: rgba(39, 174, 96, 0.1);
+    background-color: rgba(39, 174, 96, 0.15);
     color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
 }
 
 .status.maintenance {
-    background-color: rgba(231, 76, 60, 0.1);
+    background-color: rgba(231, 76, 60, 0.15);
     color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
+/* Table Footer with Color Key */
 .table-footer {
-    padding: 12px 20px;
+    padding: 15px 20px;
     background-color: #f8f9fa;
     border-top: 1px solid #eaeaea;
     font-size: 0.9rem;
 }
 
 .purpose-key {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.key-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2c3e50;
+}
+
+.key-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+}
+
+.key-color.loading {
+    background-color: #3498db;
+    border-color: #2980b9;
+}
+
+.key-color.development {
+    background-color: #9b59b6;
+    border-color: #8e44ad;
+}
+
+.key-color.breaking {
+    background-color: #e67e22;
+    border-color: #d35400;
+}
+
+/* Hour columns styling */
+.equipment-table td:nth-child(4),
+.equipment-table td:nth-child(5) {
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    color: #2c3e50;
+}
+
+.equipment-table td:last-child {
     color: #666;
+    font-style: italic;
 }
 </style>
-                
-            
-                  
-        </div>
-    </div>
 
     <!-- Modal for Dispatch Vehicles with 2 images -->
     <div id="dispatch-vehicles-modal" class="modal">
