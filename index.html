@@ -28,8 +28,6 @@
             --orange-light: #fb923c;
             --teal: #14b8a6;
             --teal-light: #2dd4bf;
-            --navy: #1e40af;
-            --navy-light: #3b82f6;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
@@ -44,13 +42,13 @@
             overflow-x: hidden;
         }
         .title-bar {
-            background: linear-gradient(90deg, #1e3a8a, #1e40af);
+            background: #4a6491; /* Changed to deep blue color */
             color: white;
             padding: 16px 24px;
             font-size: 1.7rem;
             font-weight: 700;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.5);
+            box-shadow: 0 4px 20px rgba(74, 100, 145, 0.5); /* Updated shadow to match new color */
             position: relative;
             z-index: 10;
         }
@@ -184,7 +182,7 @@
             color: var(--text);
         }
 
-        /* Plant Running Hours Button - Updated with Navy Blue */
+        /* Plant Running Hours Button */
         .plant-running-hours {
             position: fixed;
             bottom: 30px;
@@ -192,50 +190,33 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: linear-gradient(135deg, var(--success), var(--success-light));
             color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
             transition: all 0.3s ease;
             z-index: 100;
             border: 4px solid white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .plant-running-hours::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s;
-        }
-        .plant-running-hours:hover::before {
-            left: 100%;
         }
         .plant-running-hours:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(30, 64, 175, 0.6);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6);
         }
         .plant-running-hours .hours-value {
             font-size: 2rem;
             font-weight: 800;
             margin-bottom: 5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 1;
         }
         .plant-running-hours .hours-label {
             font-size: 0.9rem;
             font-weight: 600;
             opacity: 0.9;
-            z-index: 1;
         }
         .plant-running-hours .hours-status {
             font-size: 0.7rem;
@@ -246,7 +227,6 @@
             margin-top: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            z-index: 1;
         }
 
         /* Main Layout - Updated with new sizing */
@@ -467,17 +447,17 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* Dispatch Vehicles - Updated with Navy Blue */
+        /* Dispatch Vehicles */
         .dispatch-vehicles {
             margin-top: 15px; /* Reduced from 30px */
             padding: 20px 12px; /* Reduced padding */
-            background: linear-gradient(135deg, var(--navy), #1e3a8a);
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             border: none;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -500,41 +480,38 @@
         }
         .dispatch-vehicles:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
-            background: linear-gradient(135deg, #3b82f6, var(--navy));
+            box-shadow: 0 8px 20px rgba(3, 105, 161, 0.4);
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
         }
         .dispatch-vehicles .label {
             font-size: 1.1rem; /* Reduced from 1.3rem */
             color: white;
             font-weight: 600;
             margin-bottom: 0;
-            z-index: 1;
         }
         .dispatch-vehicles .value {
             font-size: 2rem; /* Reduced from 2.5rem */
             font-weight: 800;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 1;
         }
         .dispatch-vehicles i {
             font-size: 1.8rem; /* Reduced from 2.2rem */
             color: white;
             opacity: 0.9;
-            z-index: 1;
         }
 
-        /* Production & Stock Button - Updated with Navy Blue */
+        /* Production & Stock Button */
         .production-stock {
             margin-top: 15px; /* Reduced from 20px */
             padding: 20px 12px; /* Reduced padding */
-            background: linear-gradient(135deg, var(--navy), #1e3a8a);
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
             border: none;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -557,45 +534,42 @@
         }
         .production-stock:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
-            background: linear-gradient(135deg, #3b82f6, var(--navy));
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
         }
         .production-stock .label {
             font-size: 1.1rem; /* Reduced from 1.3rem */
             color: white;
             font-weight: 600;
             margin-bottom: 0;
-            z-index: 1;
         }
         .production-stock .value {
             font-size: 2rem; /* Reduced from 2.5rem */
             font-weight: 800;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 1;
         }
         .production-stock i {
             font-size: 1.8rem; /* Reduced from 2.2rem */
             color: white;
             opacity: 0.9;
-            z-index: 1;
         }
 
-        /* Clickable Items - Updated with Navy Blue */
+        /* Clickable Items */
         .feeder-clickable, .ftd-mtd-clickable, .tipper-clickable, .comp-clickable, .exc-load-clickable {
             cursor: pointer;
-            border: 2px solid var(--navy) !important;
+            border: 2px solid var(--primary) !important;
             animation: pulse 2s infinite;
         }
         .feeder-clickable:hover, .ftd-mtd-clickable:hover, .tipper-clickable:hover, .comp-clickable:hover, .exc-load-clickable:hover {
-            border-color: var(--navy-light) !important;
+            border-color: var(--primary-light) !important;
             transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(30, 64, 175, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
 
         /* Modal Controls for Fullscreen */
@@ -626,12 +600,12 @@
             transform: scale(1.1);
         }
         
-        /* Fullscreen button for main window - Updated with Navy Blue */
+        /* Fullscreen button for main window */
         .fullscreen-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
             width: 50px;
@@ -644,26 +618,11 @@
             transition: all 0.3s ease;
             font-size: 1.3rem;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        .fullscreen-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        .fullscreen-btn:hover::before {
-            left: 100%;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
         .fullscreen-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.6);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
         }
 
         /* Modal Styles */
@@ -703,7 +662,6 @@
             width: 100%;
             z-index: 1002;
             border-radius: 0;
-            background: linear-gradient(90deg, #1e3a8a, #1e40af);
         }
         
         .modal.fullscreen .modal-body {
@@ -746,7 +704,7 @@
         
         .modal-header {
             padding: 20px;
-            background: linear-gradient(90deg, #1e3a8a, #1e40af);
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             border-radius: 16px 16px 0 0;
             display: flex;
@@ -775,23 +733,6 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .close-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.3s;
-        }
-        
-        .close-btn:hover::before {
-            left: 100%;
         }
         
         .close-btn:hover {
@@ -809,7 +750,7 @@
         .modal-section h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
-            color: var(--navy);
+            color: var(--primary);
             border-bottom: 1px solid var(--border);
             padding-bottom: 5px;
         }
@@ -829,9 +770,9 @@
         }
         
         .modal-table th {
-            background-color: rgba(30, 64, 175, 0.1);
+            background-color: rgba(59, 130, 246, 0.1);
             font-weight: 600;
-            color: var(--navy);
+            color: var(--primary-light);
         }
         
         .modal-table tr:hover {
@@ -887,28 +828,11 @@
         }
         
         .report-header {
-            background: linear-gradient(90deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             padding: 16px;
             text-align: center;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .report-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .report-card:hover .report-header::before {
-            left: 100%;
         }
         
         .report-image {
@@ -951,7 +875,7 @@
             margin-bottom: 15px;
             font-size: 1.3rem;
             font-weight: 600;
-            color: var(--navy);
+            color: var(--purple);
             text-align: center;
         }
 
@@ -984,32 +908,15 @@
         .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
-            border-color: var(--navy);
+            border-color: var(--primary);
         }
         
         .gallery-header {
-            background: linear-gradient(90deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             padding: 16px;
             text-align: center;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gallery-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .gallery-item:hover .gallery-header::before {
-            left: 100%;
         }
         
         .gallery-image {
@@ -1031,14 +938,14 @@
         .team-summary {
             margin-top: 20px;
             padding: 15px;
-            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(30, 64, 175, 0.1));
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.1));
             border-radius: 12px;
-            border: 1px solid rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
         
         .team-summary h3 {
             font-size: 1.1rem;
-            color: var(--navy);
+            color: var(--primary);
             margin-bottom: 10px;
             text-align: center;
         }
@@ -1058,23 +965,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-member::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.05), transparent);
-            transition: left 0.3s;
-        }
-        
-        .team-member:hover::before {
-            left: 100%;
         }
         
         .team-member .status-dot {
@@ -1124,30 +1014,13 @@
         }
         
         .cctv-header {
-            background: linear-gradient(90deg, #1e293b, #334155);
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             padding: 16px;
             text-align: center;
             font-size: 1.3rem;
             font-weight: 600;
             border-bottom: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cctv-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cctv-container:hover .cctv-header::before {
-            left: 100%;
         }
         
         .cctv-image {
@@ -1200,28 +1073,11 @@
         }
         
         .production-table th, .stock-table th {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .production-table th::before, .stock-table th::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .production-table:hover th::before, .stock-table:hover th::before {
-            left: 100%;
         }
         
         .production-table tr:last-child td, .stock-table tr:last-child td {
@@ -1229,11 +1085,11 @@
         }
         
         .production-table tr:hover, .stock-table tr:hover {
-            background-color: rgba(0,0,0,0.02);
+            background-color: rgba(255,255,255,0.05);
         }
         
         .production-table .total-row, .stock-table .total-row {
-            background-color: rgba(30, 64, 175, 0.1);
+            background-color: rgba(16, 185, 129, 0.1);
             font-weight: 700;
         }
         
@@ -1259,24 +1115,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--navy);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cashflow-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.05), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cashflow-card:hover::before {
-            left: 100%;
+            border-left: 4px solid var(--primary);
         }
         
         .cashflow-card-title {
@@ -1314,26 +1153,9 @@
         }
         
         .cashflow-table th {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cashflow-table th::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cashflow-table:hover th::before {
-            left: 100%;
         }
         
         .cashflow-table tr:hover {
@@ -1341,7 +1163,7 @@
         }
         
         .action-btn {
-            background: var(--navy);
+            background: var(--primary);
             color: white;
             border: none;
             padding: 6px 12px;
@@ -1349,27 +1171,10 @@
             cursor: pointer;
             font-size: 12px;
             transition: background 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.3s;
-        }
-        
-        .action-btn:hover::before {
-            left: 100%;
         }
         
         .action-btn:hover {
-            background: var(--navy-light);
+            background: var(--primary-light);
         }
 
         /* Equipment Report Table */
@@ -1383,7 +1188,7 @@
         }
         
         .equipment-report h3 {
-            color: var(--navy);
+            color: var(--warning);
             margin-bottom: 15px;
             text-align: center;
         }
@@ -1400,26 +1205,9 @@
         }
         
         .equipment-table th {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .equipment-table th::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .equipment-table:hover th::before {
-            left: 100%;
         }
         
         .equipment-table tr:last-child td {
@@ -1448,29 +1236,12 @@
         }
         
         .production-table-container th {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             font-weight: 600;
             padding: 14px 16px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .production-table-container th::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .production-table-container table:hover th::before {
-            left: 100%;
         }
         
         .production-table-container td {
@@ -1484,7 +1255,7 @@
         }
         
         .production-table-container tr.highlight {
-            background-color: rgba(30, 64, 175, 0.05);
+            background-color: rgba(239, 68, 68, 0.05);
         }
         
         .production-table-container tr:hover {
@@ -1504,92 +1275,12 @@
         }
         
         .production-table-container .target-badge {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            background: #4a6491; /* Changed to match title bar color */
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 600;
             font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .production-table-container .target-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .production-table-container .target-badge:hover::before {
-            left: 100%;
-        }
-        
-        /* Cashflow Button in FTD/MTD Modal - Updated with Navy Blue */
-        .cashflow-btn {
-            margin-top: 30px;
-            padding: 20px 12px;
-            background: linear-gradient(135deg, var(--navy), #1e3a8a);
-            border: none;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cashflow-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .cashflow-btn:hover::before {
-            left: 100%;
-        }
-        
-        .cashflow-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
-            background: linear-gradient(135deg, #3b82f6, var(--navy));
-        }
-        
-        .cashflow-btn .label {
-            font-size: 1.1rem;
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0;
-            z-index: 1;
-        }
-        
-        .cashflow-btn .value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        
-        .cashflow-btn i {
-            font-size: 1.8rem;
-            color: white;
-            opacity: 0.9;
-            z-index: 1;
         }
 
         /* Responsive */
@@ -1877,9 +1568,9 @@
                 <button class="close-btn" onclick="closeModal('tipper-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Tipper Dashboard content remains the same -->
-                <div style="width: 100%; height: 600px; overflow: hidden; position: relative;">
-                    <iframe src="tipper-dashboard.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                <div class="zoom-modal-body">
+                    <div class="report-title">Tippers Available Report</div>
+                    <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/Tipper%20wise%20MTD%20Availability.jpg" alt="Tippers Available Report">
                 </div>
                 
                 <!-- Simplified Tipper Team Summary -->
@@ -2072,7 +1763,7 @@
                 </div>
                 
                 <!-- Cashflow Report Button -->
-                <div class="cashflow-btn" onclick="openModal('cashflow-modal')">
+                <div class="production-stock" onclick="openModal('cashflow-modal')" style="margin-top: 30px;">
                     <div class="label">
                         <i class="fas fa-money-bill-wave"></i> Cashflow Report
                     </div>
@@ -2355,13 +2046,82 @@
     <div id="cashflow-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><i class="fas fa-money-bill-wave"></i> Cashflow Report</h2>
+                <h2><i class="fas fa-chart-line"></i> Cashflow Report</h2>
                 <button class="close-btn" onclick="closeModal('cashflow-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Cashflow content remains the same -->
-                <div style="width: 100%; height: 600px; overflow: hidden; position: relative;">
-                    <iframe src="cashflow-dashboard.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                <div class="cashflow-container">
+                    <div class="cashflow-cards">
+                        <div class="cashflow-card">
+                            <div class="cashflow-card-title">Total Outstanding</div>
+                            <div class="cashflow-card-value">₹ 6,12,15,020</div>
+                        </div>
+                        <div class="cashflow-card">
+                            <div class="cashflow-card-title">Cash Inflow</div>
+                            <div class="cashflow-card-value">₹ 35,81,812</div>
+                        </div>
+                        <div class="cashflow-card">
+                            <div class="cashflow-card-title">Cash Outflow</div>
+                            <div class="cashflow-card-value">₹ 2,05,155</div>
+                        </div>
+                        <div class="cashflow-card">
+                            <div class="cashflow-card-title">Total Liability</div>
+                            <div class="cashflow-card-value">₹ 4,05,35,333</div>
+                        </div>
+                    </div>
+                    
+                    <table class="cashflow-table">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Billed OS</th>
+                                <th>Overdue OS</th>
+                                <th>30 Days</th>
+                                <th>45 Days</th>
+                                <th>60 Days</th>
+                                <th>90 Days</th>
+                                <th>120 Days</th>
+                                <th>365 Days</th>
+                                <th>DSO</th>
+                                <th>Unbilled</th>
+                                <th>Received</th>
+                                <th>Expected Collection</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ABC Manufacturing Ltd.</td>
+                                <td>₹ 1,25,75,500</td>
+                                <td>₹ 85,25,000</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>42</td>
+                                <td>₹ 12,50,000</td>
+                                <td>₹ 5,25,000</td>
+                                <td>₹ 45,00,000</td>
+                            </tr>
+                            <tr>
+                                <td>XYZ Technologies Inc.</td>
+                                <td>₹ 95,20,150</td>
+                                <td>₹ 65,10,000</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>₹ -</td>
+                                <td>38</td>
+                                <td>₹ 8,75,000</td>
+                                <td>₹ 4,50,000</td>
+                                <td>₹ 35,00,000</td>
+                            </tr>
+                            <!-- Additional rows as needed -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -2436,11 +2196,10 @@
                     </table>
                     
                     <div style="margin-top: 30px; text-align: center;">
-                        <div style="background: linear-gradient(135deg, var(--navy), var(--navy-light)); padding: 20px; border-radius: 12px; color: white; position: relative; overflow: hidden;">
-                            <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transition: left 0.5s;"></div>
-                            <h3 style="margin-bottom: 10px; position: relative; z-index: 1;">Current Plant Status: <span id="plant-status-modal">RUNNING</span></h3>
-                            <p style="position: relative; z-index: 1;">Plant is currently operating at <strong>44.6%</strong> efficiency</p>
-                            <p style="position: relative; z-index: 1;">Last updated: <span id="plant-last-updated">Just now</span></p>
+                        <div style="background: #4a6491; padding: 20px; border-radius: 12px; color: white;">
+                            <h3 style="margin-bottom: 10px;">Current Plant Status: <span id="plant-status-modal">RUNNING</span></h3>
+                            <p>Plant is currently operating at <strong>44.6%</strong> efficiency</p>
+                            <p>Last updated: <span id="plant-last-updated">Just now</span></p>
                         </div>
                     </div>
                 </div>
@@ -2703,18 +2462,6 @@
             
             combinedItems.forEach(item => {
                 item.style.cursor = 'pointer';
-            });
-            
-            // Add animation to buttons on hover
-            const navyButtons = document.querySelectorAll('.dispatch-vehicles, .production-stock, .cashflow-btn, .fullscreen-btn, .plant-running-hours, .close-btn, .action-btn, .target-badge');
-            navyButtons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = this.classList.contains('plant-running-hours') ? 'scale(1.1) rotate(5deg)' : 'translateY(-4px)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = this.classList.contains('plant-running-hours') ? 'scale(1)' : 'translateY(0)';
-                });
             });
         });
         
