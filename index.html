@@ -2703,7 +2703,562 @@
             </div>
             <div class="modal-body">
                 <div class="image-gallery-2">
-                     Dispatch Vehicles Details
+                     <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarry Production Summary - Day & Night Shifts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a3c8b, #2a5bc5);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        header h1 i {
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .date-display {
+            background-color: #e9f2ff;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a3c8b;
+            border-bottom: 1px solid #d0ddec;
+        }
+        
+        .shifts-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 25px;
+            gap: 25px;
+        }
+        
+        .shift-section {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        .shift-header {
+            padding: 18px 20px;
+            color: white;
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .day-shift .shift-header {
+            background: linear-gradient(to right, #1e7e34, #2fa84f);
+        }
+        
+        .night-shift .shift-header {
+            background: linear-gradient(to right, #0d47a1, #1a5bc5);
+        }
+        
+        .vehicle-count {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .customer-table th {
+            background-color: #f8f9fa;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: 700;
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 0.95rem;
+        }
+        
+        .customer-table td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .customer-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .customer-table tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .customer-name {
+            text-align: left;
+            font-weight: 600;
+            color: #1a3c8b;
+        }
+        
+        .total-column {
+            font-weight: 700;
+            background-color: #f0f7ff;
+        }
+        
+        .summary-section {
+            padding: 25px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e0e6ed;
+        }
+        
+        .summary-title {
+            font-size: 1.6rem;
+            color: #1a3c8b;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .summary-table th {
+            background-color: #1a3c8b;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .summary-table td {
+            padding: 16px 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e6ed;
+            font-weight: 500;
+        }
+        
+        .summary-table tr:nth-child(even) {
+            background-color: #f0f7ff;
+        }
+        
+        .grand-total {
+            background-color: #e8f5e9 !important;
+            font-weight: 700;
+            color: #1b5e20;
+        }
+        
+        .overall-total {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px dashed #c5d5ea;
+        }
+        
+        .total-card {
+            background: linear-gradient(to right, #1a3c8b, #2a5bc5);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(26, 60, 139, 0.2);
+        }
+        
+        .total-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .total-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e0e6ed;
+            background-color: #f8fafc;
+        }
+        
+        @media (max-width: 768px) {
+            .shifts-container {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .customer-table th, .customer-table td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+            }
+            
+            .summary-table th, .summary-table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .total-card {
+                min-width: 100%;
+            }
+        }
+        
+        .material-icons {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        .product-abbr {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-mountain"></i> Stone Quarry Production Summary</h1>
+            <p class="subtitle">Daily Production Report - Day Shift & Night Shift</p>
+        </header>
+        
+        <div class="date-display">
+            <i class="fas fa-calendar-alt"></i> Production Date: <span id="currentDate"></span>
+        </div>
+        
+        <div class="shifts-container">
+            <div class="shift-section day-shift">
+                <div class="shift-header">
+                    <span><i class="fas fa-sun"></i> A-SHIFT (Day Shift)</span>
+                    <span class="vehicle-count">Vehicles: 14</span>
+                </div>
+                
+                <table class="customer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>10MM</th>
+                            <th>20MM</th>
+                            <th>V/SAND</th>
+                            <th>Scalping</th>
+                            <th>40-65MM</th>
+                            <th>R/SAND</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="customer-name">L & T P2 – Rambali</td>
+                            <td>99.96</td>
+                            <td></td>
+                            <td>31.70</td>
+                            <td></td>
+                            <td>12.50</td>
+                            <td></td>
+                            <td class="total-column">144.16</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Prasant Maravaram</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>5.20</td>
+                            <td></td>
+                            <td></td>
+                            <td class="total-column">5.20</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">MK Builders – Madhurwada</td>
+                            <td>41.06</td>
+                            <td></td>
+                            <td>41.27</td>
+                            <td></td>
+                            <td>10.00</td>
+                            <td></td>
+                            <td class="total-column">92.33</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Sriram Constructions</td>
+                            <td>25.00</td>
+                            <td></td>
+                            <td>18.60</td>
+                            <td></td>
+                            <td>5.20</td>
+                            <td></td>
+                            <td class="total-column">48.80</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Rama RMC</td>
+                            <td>32.20</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>4.10</td>
+                            <td></td>
+                            <td class="total-column">36.30</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Bharathi Infra</td>
+                            <td>28.90</td>
+                            <td></td>
+                            <td>12.30</td>
+                            <td></td>
+                            <td>6.50</td>
+                            <td></td>
+                            <td class="total-column">47.70</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="shift-section night-shift">
+                <div class="shift-header">
+                    <span><i class="fas fa-moon"></i> B-SHIFT (Night Shift)</span>
+                    <span class="vehicle-count">Vehicles: 12</span>
+                </div>
+                
+                <table class="customer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>10MM</th>
+                            <th>20MM</th>
+                            <th>V/SAND</th>
+                            <th>Scalping</th>
+                            <th>40-65MM</th>
+                            <th>R/SAND</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="customer-name">Aravind Techno</td>
+                            <td>12.40</td>
+                            <td></td>
+                            <td>10.20</td>
+                            <td></td>
+                            <td>4.50</td>
+                            <td></td>
+                            <td class="total-column">27.10</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">KEC</td>
+                            <td></td>
+                            <td></td>
+                            <td>36.00</td>
+                            <td></td>
+                            <td>5.30</td>
+                            <td></td>
+                            <td class="total-column">41.30</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Sivakumar</td>
+                            <td></td>
+                            <td></td>
+                            <td>22.80</td>
+                            <td></td>
+                            <td>8.00</td>
+                            <td></td>
+                            <td class="total-column">30.80</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Bharat Verma</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>6.11</td>
+                            <td></td>
+                            <td></td>
+                            <td class="total-column">6.11</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Burugu Palli</td>
+                            <td></td>
+                            <td></td>
+                            <td>15.60</td>
+                            <td>3.40</td>
+                            <td>6.70</td>
+                            <td></td>
+                            <td class="total-column">25.70</td>
+                        </tr>
+                        <tr>
+                            <td class="customer-name">Laxmi Enterprises</td>
+                            <td></td>
+                            <td></td>
+                            <td>12.60</td>
+                            <td></td>
+                            <td>6.00</td>
+                            <td></td>
+                            <td class="total-column">18.60</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note">(All customers replaced with given names)</p>
+            </div>
+        </div>
+        
+        <div class="summary-section">
+            <h2 class="summary-title"><i class="fas fa-chart-bar"></i> PRODUCTION SUMMARY</h2>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Shift</th>
+                        <th>No. of Vehicles</th>
+                        <th>10MM</th>
+                        <th>20MM</th>
+                        <th>V/SAND</th>
+                        <th>Scalping</th>
+                        <th>40-65MM</th>
+                        <th>R/SAND</th>
+                        <th>Grand Total MT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day Shift Total</strong></td>
+                        <td>14</td>
+                        <td>267.12</td>
+                        <td></td>
+                        <td>103.87</td>
+                        <td>9.30</td>
+                        <td>34.20</td>
+                        <td></td>
+                        <td><strong>414.49</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Night Shift Total</strong></td>
+                        <td>12</td>
+                        <td>12.40</td>
+                        <td></td>
+                        <td>97.20</td>
+                        <td>9.51</td>
+                        <td>30.50</td>
+                        <td></td>
+                        <td><strong>149.61</strong></td>
+                    </tr>
+                    <tr class="grand-total">
+                        <td><strong>Combined Total (Day + Night)</strong></td>
+                        <td><strong>26</strong></td>
+                        <td><strong>279.52</strong></td>
+                        <td></td>
+                        <td><strong>201.07</strong></td>
+                        <td><strong>18.81</strong></td>
+                        <td><strong>64.70</strong></td>
+                        <td></td>
+                        <td><strong>984.00</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="overall-total">
+                <div class="total-card">
+                    <h3><i class="fas fa-truck"></i> OVERALL GRAND TOTAL VEHICLES</h3>
+                    <div class="value">26</div>
+                </div>
+                <div class="total-card">
+                    <h3><i class="fas fa-weight-hanging"></i> OVERALL GRAND TOTAL METRIC TONS</h3>
+                    <div class="value">984</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Quarry Production Management System | Report Generated Automatically</p>
+            <p>All values are in Metric Tons (MT) | V/Sand = Manufactured Sand | R/Sand = River Sand</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Set current date
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        
+        // Add hover effect to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableRows = document.querySelectorAll('.customer-table tr, .summary-table tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#e8f4fd';
+                });
+                row.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('grand-total')) {
+                        this.style.backgroundColor = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
                     
                 </div>
             </div>
