@@ -1566,21 +1566,487 @@
             </div>
             <div class="modal-body">
                 <div class="image-gallery">
-                    <div class="gallery-item" onclick="openZoomModal('Live Summary', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.58.37%20PM.jpeg')">
-                        <div class="gallery-header">Live Summary</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2010.58.37%20PM.jpeg" alt="Live Summary" class="gallery-image">
-                        <div class="gallery-footer">Click to view in full size</div>
+                    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Trips Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #1a6fc4 0%, #0d4d8c 100%);
+            color: white;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .last-updated {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .card-content {
+            padding: 0;
+        }
+        
+        .data-section {
+            padding: 20px 24px;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a6fc4;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-title i {
+            font-size: 1rem;
+        }
+        
+        .vehicle-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .vehicle-table th {
+            background-color: #f0f7ff;
+            color: #1a6fc4;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #dde7f5;
+        }
+        
+        .vehicle-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .vehicle-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .vehicle-table tr:hover {
+            background-color: #f9fbff;
+        }
+        
+        .totals-section {
+            background-color: #f8fafd;
+            padding: 20px 24px;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .totals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .total-item {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .total-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Color-coded total items */
+        .total-item:nth-child(1) {
+            border-top-color: #4a90e2; /* Day trips - blue */
+        }
+        
+        .total-item:nth-child(2) {
+            border-top-color: #2c3e50; /* Night trips - dark blue */
+        }
+        
+        .total-item:nth-child(3) {
+            border-top-color: #1a6fc4; /* Total trips - primary blue */
+        }
+        
+        .total-item:nth-child(4) {
+            border-top-color: #27ae60; /* Tonnage - green */
+        }
+        
+        .total-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .total-label i {
+            font-size: 0.9rem;
+        }
+        
+        .total-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        /* Color-coded total values */
+        .total-item:nth-child(1) .total-value {
+            color: #4a90e2; /* Day trips */
+        }
+        
+        .total-item:nth-child(2) .total-value {
+            color: #2c3e50; /* Night trips */
+        }
+        
+        .total-item:nth-child(3) .total-value {
+            color: #1a6fc4; /* Total trips */
+        }
+        
+        .total-item:nth-child(4) .total-value {
+            color: #27ae60; /* Tonnage */
+        }
+        
+        .total-subtext {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.4;
+        }
+        
+        .material-section {
+            padding: 20px 24px;
+        }
+        
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .material-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1a6fc4;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .material-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .material-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .material-unit {
+            font-size: 0.9rem;
+            color: #888;
+            margin-left: 3px;
+        }
+        
+        .boulder-stock {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffb300;
+        }
+        
+        .boulder-stock .material-label {
+            color: #b38b00;
+        }
+        
+        .zero-trips {
+            color: #ff6b6b;
+        }
+        
+        .day-trips {
+            color: #4a90e2;
+        }
+        
+        .night-trips {
+            color: #2c3e50;
+        }
+        
+        .footer-note {
+            padding: 15px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            background-color: #f8fafd;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        @media (max-width: 768px) {
+            .vehicle-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .data-section {
+                padding: 15px;
+            }
+            
+            .totals-section, .material-section {
+                padding: 15px;
+            }
+            
+            .total-value {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .totals-grid, .material-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-card">
+        <div class="card-header">
+            <h2><i class="fas fa-truck-moving"></i> Live Vehicle Trips Summary</h2>
+            <div class="last-updated">Updated: <span id="current-time"></span></div>
+        </div>
+        
+        <div class="card-content">
+            <div class="data-section">
+                <div class="section-title">
+                    <i class="fas fa-table"></i> Vehicle Trip Details
+                </div>
+                <table class="vehicle-table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle Number</th>
+                            <th>Day Trips</th>
+                            <th>Night Trips</th>
+                            <th>Total Trips</th>
+                            <th>Tonnage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AP39UQ0095</td>
+                            <td class="day-trips">3</td>
+                            <td class="night-trips">2</td>
+                            <td>5</td>
+                            <td>121.5</td>
+                        </tr>
+                        <tr>
+                            <td>AP39UQ0097</td>
+                            <td class="day-trips">2</td>
+                            <td class="night-trips">3</td>
+                            <td>5</td>
+                            <td>121.5</td>
+                        </tr>
+                        <tr>
+                            <td>AP39UW9880</td>
+                            <td class="day-trips">1</td>
+                            <td class="night-trips">3</td>
+                            <td>4</td>
+                            <td>97.2</td>
+                        </tr>
+                        <tr>
+                            <td>AP39UW9881</td>
+                            <td class="day-trips">3</td>
+                            <td class="night-trips">2</td>
+                            <td>5</td>
+                            <td>121.5</td>
+                        </tr>
+                        <tr>
+                            <td>AP39UY4651</td>
+                            <td class="day-trips">2</td>
+                            <td class="night-trips">2</td>
+                            <td>4</td>
+                            <td>97.2</td>
+                        </tr>
+                        <tr>
+                            <td>AP39UY4652</td>
+                            <td class="day-trips">2</td>
+                            <td class="night-trips">1</td>
+                            <td>3</td>
+                            <td>72.9</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WC0926</td>
+                            <td class="day-trips">3</td>
+                            <td class="night-trips">1</td>
+                            <td>4</td>
+                            <td>97.2</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WC0927</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WC0928</td>
+                            <td class="day-trips">1</td>
+                            <td class="night-trips">2</td>
+                            <td>3</td>
+                            <td>72.9</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WF2052</td>
+                            <td class="day-trips">2</td>
+                            <td class="night-trips">2</td>
+                            <td>4</td>
+                            <td>97.2</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WF2057</td>
+                            <td class="day-trips">1</td>
+                            <td class="night-trips">2</td>
+                            <td>3</td>
+                            <td>72.9</td>
+                        </tr>
+                        <tr>
+                            <td>AP39WF2058</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                            <td class="zero-trips">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="totals-section">
+                <div class="section-title">
+                    <i class="fas fa-calculator"></i> Trip Totals
+                </div>
+                <div class="totals-grid">
+                    <div class="total-item">
+                        <div class="total-label"><i class="fas fa-sun"></i> Total Day Trips</div>
+                        <div class="total-value">20</div>
+                        <div class="total-subtext">Across all vehicles</div>
                     </div>
-                    <div class="gallery-item" onclick="openZoomModal('Trip Wise Detail', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/vehciletrip%20wise%20.jpg')">
-                        <div class="gallery-header">Trip Wise Detail</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/vehciletrip%20wise%20.jpg" alt="Trip Wise Detail" class="gallery-image">
-                        <div class="gallery-footer">Click to view in full size</div>
+                    <div class="total-item">
+                        <div class="total-label"><i class="fas fa-moon"></i> Total Night Trips</div>
+                        <div class="total-value">20</div>
+                        <div class="total-subtext">Across all vehicles</div>
                     </div>
-                    <div class="gallery-item" onclick="openZoomModal('Time Difference Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg')">
-                        <div class="gallery-header">Time Difference Report</div>
-                        <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-11-27%20at%2011.05.37%20PM.jpeg" alt="Time Difference Report" class="gallery-image">
-                        <div class="gallery-footer">Click to view in full size</div>
+                    <div class="total-item">
+                        <div class="total-label"><i class="fas fa-road"></i> Total Trips</div>
+                        <div class="total-value">40</div>
+                        <div class="total-subtext">Day + Night trips</div>
                     </div>
+                    <div class="total-item">
+                        <div class="total-label"><i class="fas fa-weight-hanging"></i> Total Tonnage</div>
+                        <div class="total-value">972</div>
+                        <div class="total-subtext">Total weight transported</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="material-section">
+                <div class="section-title">
+                    <i class="fas fa-mountain"></i> Material Movement & Stock
+                </div>
+                <div class="material-grid">
+                    <div class="material-item">
+                        <div class="material-label">Boulder to Plant</div>
+                        <div class="material-value">625<span class="material-unit">tons</span></div>
+                    </div>
+                    <div class="material-item">
+                        <div class="material-label">Boulder to Stock</div>
+                        <div class="material-value">327<span class="material-unit">tons</span></div>
+                    </div>
+                    <div class="material-item boulder-stock">
+                        <div class="material-label">Last Boulder Stock at Plant</div>
+                        <div class="material-value">1937<span class="material-unit">tons</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            Data includes random day/night trips | Live summary updated in real-time
+        </div>
+    </div>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const dateString = now.toLocaleDateString([], {month: 'short', day: 'numeric', year: 'numeric'});
+            document.getElementById('current-time').textContent = `${dateString} ${timeString}`;
+        }
+        
+        // Initialize time and update every minute
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // Add subtle row highlighting on hover for better UX
+        document.querySelectorAll('.vehicle-table tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f0f7ff';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('header-row')) {
+                    this.style.backgroundColor = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+                    
                 </div>
                 
                 <!-- Simplified Quarry Team Summary -->
