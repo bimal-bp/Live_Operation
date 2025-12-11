@@ -2296,76 +2296,310 @@
 
     <!-- Modal for Cashflow Report -->
     <div id="cashflow-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-money-bill-wave"></i> Cashflow Report</h2>
-                <button class="close-btn" onclick="closeModal('cashflow-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="cashflow-container">
-                    <h3 style="color: var(--purple); margin-bottom: 20px; text-align: center;">Accounts Receivable Dashboard</h3>
-                    
-                    <div class="cashflow-cards">
-                        <div class="cashflow-card">
-                            <div class="cashflow-card-title">Total Outstanding</div>
-                            <div class="cashflow-card-value">₹ 6,12,15,020</div>
-                        </div>
-                        <div class="cashflow-card">
-                            <div class="cashflow-card-title">Cash Inflow</div>
-                            <div class="cashflow-card-value">₹ 35,81,812</div>
-                        </div>
-                        <div class="cashflow-card">
-                            <div class="cashflow-card-title">Cash Outflow</div>
-                            <div class="cashflow-card-value">₹ 2,05,155</div>
-                        </div>
-                        <div class="cashflow-card">
-                            <div class="cashflow-card-title">Total Liability</div>
-                            <div class="cashflow-card-value">₹ 4,05,35,333</div>
-                        </div>
-                    </div>
-                    
-                    <table class="cashflow-table">
-                        <thead>
-                            <tr>
-                                <th>Customer Name</th>
-                                <th>Billed OS</th>
-                                <th>Overdue OS</th>
-                                <th>&lt;30 Days</th>
-                                <th>DSO</th>
-                                <th>Unbilled</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ABC Manufacturing Ltd.</td>
-                                <td>₹ 1,25,75,500</td>
-                                <td>₹ 85,25,000</td>
-                                <td>₹ 15,25,000</td>
-                                <td>42</td>
-                                <td>₹ 12,50,000</td>
-                            </tr>
-                            <tr>
-                                <td>XYZ Constructions</td>
-                                <td>₹ 98,45,300</td>
-                                <td>₹ 65,20,000</td>
-                                <td>₹ 12,30,000</td>
-                                <td>38</td>
-                                <td>₹ 8,75,000</td>
-                            </tr>
-                            <tr>
-                                <td>PQR Infrastructure</td>
-                                <td>₹ 1,42,35,600</td>
-                                <td>₹ 95,45,000</td>
-                                <td>₹ 18,50,000</td>
-                                <td>45</td>
-                                <td>₹ 15,25,000</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-money-bill-wave"></i> Cashflow Report</h2>
+            <button class="close-btn" onclick="closeModal('cashflow-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="cashflow-container">
+                <h3 style="color: var(--purple); margin-bottom: 20px; text-align: center;">Accounts Receivable Dashboard</h3>
+                
+                <!-- Round Shape Buttons -->
+                <div class="round-buttons-container">
+                    <button class="round-btn active" onclick="filterData('all')">All</button>
+                    <button class="round-btn" onclick="filterData('lt')">L&T</button>
+                    <button class="round-btn" onclick="filterData('kec')">KEC</button>
+                    <button class="round-btn" onclick="filterData('other')">Others</button>
                 </div>
+                
+                <!-- Additional Metrics Cards -->
+                <div class="additional-metrics">
+                    <div class="metric-card">
+                        <div class="metric-title">Total Compressor Bill Till Now</div>
+                        <div class="metric-value">₹ 85,42,150</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Transport Bill Till Now</div>
+                        <div class="metric-value">₹ 42,35,620</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Pending Invoices</div>
+                        <div class="metric-value">₹ 12,85,400</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Expected Dec Collection</div>
+                        <div class="metric-value">₹ 1,34,20,829</div>
+                    </div>
+                </div>
+                
+                <!-- Main Cashflow Cards -->
+                <div class="cashflow-cards">
+                    <div class="cashflow-card">
+                        <div class="cashflow-card-title">Total Outstanding</div>
+                        <div class="cashflow-card-value">₹ 6,12,15,020</div>
+                    </div>
+                    <div class="cashflow-card">
+                        <div class="cashflow-card-title">Cash Inflow</div>
+                        <div class="cashflow-card-value">₹ 35,81,812</div>
+                    </div>
+                    <div class="cashflow-card">
+                        <div class="cashflow-card-title">Cash Outflow</div>
+                        <div class="cashflow-card-value">₹ 2,05,155</div>
+                    </div>
+                    <div class="cashflow-card">
+                        <div class="cashflow-card-title">Total Liability</div>
+                        <div class="cashflow-card-value">₹ 4,05,35,333</div>
+                    </div>
+                </div>
+                
+                <!-- Expanded Table with new columns -->
+                <table class="cashflow-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Billed OS</th>
+                            <th>Overdue OS</th>
+                            <th>&lt;30 Days</th>
+                            <th>30–45 Days</th>
+                            <th>45–60 Days</th>
+                            <th>60–90 Days</th>
+                            <th>90–120 Days</th>
+                            <th>120–365 Days</th>
+                            <th>DSO</th>
+                            <th>Unbilled (01/12/25 to 08/12/25)</th>
+                            <th>Recd upto 08-12-25</th>
+                            <th>Expected Collection Dec-25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>L&T Construction Division</td>
+                            <td>₹ 95,35,922</td>
+                            <td>₹ 89,53,541</td>
+                            <td>₹ 5,82,348</td>
+                            <td>₹ 24,34,581</td>
+                            <td>–</td>
+                            <td>₹ 39,61,323</td>
+                            <td>–</td>
+                            <td>₹ 25,57,670</td>
+                            <td>77</td>
+                            <td>₹ 2,75,942</td>
+                            <td>₹ 10,81,812</td>
+                            <td>₹ 50,44,166</td>
+                        </tr>
+                        <tr>
+                            <td>L&T Geo Structure</td>
+                            <td>₹ 23,24,952</td>
+                            <td>₹ 23,24,952</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>₹ 23,24,952</td>
+                            <td>120</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>₹ 23,24,952</td>
+                        </tr>
+                        <tr>
+                            <td>KEC International Ltd</td>
+                            <td>₹ 74,64,718</td>
+                            <td>₹ 60,51,711</td>
+                            <td>₹ 9,97,069</td>
+                            <td>₹ 4,15,938</td>
+                            <td>–</td>
+                            <td>₹ 16,06,759</td>
+                            <td>₹ 32,18,007</td>
+                            <td>₹ 12,26,945</td>
+                            <td>101</td>
+                            <td>₹ 11,60,832</td>
+                            <td>–</td>
+                            <td>₹ 60,51,711</td>
+                        </tr>
+                        <!-- Original rows -->
+                        <tr>
+                            <td>ABC Manufacturing Ltd.</td>
+                            <td>₹ 1,25,75,500</td>
+                            <td>₹ 85,25,000</td>
+                            <td>₹ 15,25,000</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>42</td>
+                            <td>₹ 12,50,000</td>
+                            <td>₹ 5,00,000</td>
+                            <td>₹ 85,25,000</td>
+                        </tr>
+                        <tr>
+                            <td>XYZ Constructions</td>
+                            <td>₹ 98,45,300</td>
+                            <td>₹ 65,20,000</td>
+                            <td>₹ 12,30,000</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>38</td>
+                            <td>₹ 8,75,000</td>
+                            <td>₹ 20,00,000</td>
+                            <td>₹ 65,20,000</td>
+                        </tr>
+                        <tr>
+                            <td>PQR Infrastructure</td>
+                            <td>₹ 1,42,35,600</td>
+                            <td>₹ 95,45,000</td>
+                            <td>₹ 18,50,000</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>–</td>
+                            <td>45</td>
+                            <td>₹ 15,25,000</td>
+                            <td>–</td>
+                            <td>₹ 95,45,000</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+
+<style>
+    .round-buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
+    
+    .round-btn {
+        padding: 10px 25px;
+        border-radius: 25px;
+        border: 2px solid var(--purple);
+        background-color: white;
+        color: var(--purple);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        min-width: 100px;
+    }
+    
+    .round-btn:hover {
+        background-color: var(--light-purple);
+        transform: translateY(-2px);
+    }
+    
+    .round-btn.active {
+        background-color: var(--purple);
+        color: white;
+    }
+    
+    .additional-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .metric-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .metric-title {
+        font-size: 12px;
+        color: #6c757d;
+        font-weight: 600;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .metric-value {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--purple);
+    }
+    
+    .cashflow-table {
+        margin-top: 25px;
+    }
+    
+    .cashflow-table th {
+        background-color: var(--purple);
+        color: white;
+        padding: 12px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    
+    .cashflow-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .cashflow-table tr:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<script>
+    function filterData(filter) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.round-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Add active class to clicked button
+        event.target.classList.add('active');
+        
+        // Here you would typically filter the table data
+        // For now, we'll just log the filter
+        console.log('Filtering by:', filter);
+        
+        // Example filter logic (you would implement actual filtering)
+        const rows = document.querySelectorAll('.cashflow-table tbody tr');
+        rows.forEach(row => {
+            const customerCell = row.cells[0].textContent;
+            let showRow = false;
+            
+            switch(filter) {
+                case 'all':
+                    showRow = true;
+                    break;
+                case 'lt':
+                    showRow = customerCell.includes('L&T');
+                    break;
+                case 'kec':
+                    showRow = customerCell.includes('KEC');
+                    break;
+                case 'other':
+                    showRow = !customerCell.includes('L&T') && !customerCell.includes('KEC');
+                    break;
+            }
+            
+            row.style.display = showRow ? '' : 'none';
+        });
+    }
+    
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+</script>
 
     <!-- Modal for Plant Running Hours -->
     <div id="plant-hours-modal" class="modal">
