@@ -2491,283 +2491,276 @@
                 <h3 style="color: var(--purple); margin-bottom: 20px; text-align: center;">Accounts Receivable Dashboard</h3>
                 
                 <!-- Round Shape Buttons -->
-                <div class="round-buttons-container">
-                    <button class="round-btn active" onclick="filterData('all')">All</button>
-                    <button class="round-btn" onclick="filterData('lt')">L&T</button>
-                    <button class="round-btn" onclick="filterData('kec')">KEC</button>
-                    <button class="round-btn" onclick="filterData('other')">Others</button>
-                </div>
-                
-                <!-- Additional Metrics Cards -->
-                
-                
-                <!-- Main Cashflow Cards -->
-                <div class="cashflow-cards">
-                    <div class="cashflow-card">
-                        <div class="cashflow-card-title">Total Outstanding</div>
-                        <div class="cashflow-card-value">₹ 6,12,15,020</div>
-                    </div>
-                    <div class="cashflow-card">
-                        <div class="cashflow-card-title">Cash Inflow</div>
-                        <div class="cashflow-card-value">₹ 35,81,812</div>
-                    </div>
-                    <div class="cashflow-card">
-                        <div class="cashflow-card-title">Cash Outflow</div>
-                        <div class="cashflow-card-value">₹ 2,05,155</div>
-                    </div>
-                    <div class="cashflow-card">
-                        <div class="cashflow-card-title">Total Liability</div>
-                        <div class="cashflow-card-value">₹ 4,05,35,333</div>
-                    </div>
-                </div>
-                
-                <!-- Expanded Table with new columns -->
-                <table class="cashflow-table">
-                    <thead>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Billed OS</th>
-                            <th>Overdue OS</th>
-                            <th>&lt;30 Days</th>
-                            <th>30–45 Days</th>
-                            <th>45–60 Days</th>
-                            <th>60–90 Days</th>
-                            <th>90–120 Days</th>
-                            <th>120–365 Days</th>
-                            <th>DSO</th>
-                            <th>Unbilled (01/12/25 to 08/12/25)</th>
-                            <th>Recd upto 08-12-25</th>
-                            <th>Expected Collection Dec-25</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>L&T Construction Division</td>
-                            <td>₹ 95,35,922</td>
-                            <td>₹ 89,53,541</td>
-                            <td>₹ 5,82,348</td>
-                            <td>₹ 24,34,581</td>
-                            <td>–</td>
-                            <td>₹ 39,61,323</td>
-                            <td>–</td>
-                            <td>₹ 25,57,670</td>
-                            <td>77</td>
-                            <td>₹ 2,75,942</td>
-                            <td>₹ 10,81,812</td>
-                            <td>₹ 50,44,166</td>
-                        </tr>
-                        <tr>
-                            <td>L&T Geo Structure</td>
-                            <td>₹ 23,24,952</td>
-                            <td>₹ 23,24,952</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>₹ 23,24,952</td>
-                            <td>120</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>₹ 23,24,952</td>
-                        </tr>
-                        <tr>
-                            <td>KEC International Ltd</td>
-                            <td>₹ 74,64,718</td>
-                            <td>₹ 60,51,711</td>
-                            <td>₹ 9,97,069</td>
-                            <td>₹ 4,15,938</td>
-                            <td>–</td>
-                            <td>₹ 16,06,759</td>
-                            <td>₹ 32,18,007</td>
-                            <td>₹ 12,26,945</td>
-                            <td>101</td>
-                            <td>₹ 11,60,832</td>
-                            <td>–</td>
-                            <td>₹ 60,51,711</td>
-                        </tr>
-                        <!-- Original rows -->
-                        <tr>
-                            <td>ABC Manufacturing Ltd.</td>
-                            <td>₹ 1,25,75,500</td>
-                            <td>₹ 85,25,000</td>
-                            <td>₹ 15,25,000</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>42</td>
-                            <td>₹ 12,50,000</td>
-                            <td>₹ 5,00,000</td>
-                            <td>₹ 85,25,000</td>
-                        </tr>
-                        <tr>
-                            <td>XYZ Constructions</td>
-                            <td>₹ 98,45,300</td>
-                            <td>₹ 65,20,000</td>
-                            <td>₹ 12,30,000</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>38</td>
-                            <td>₹ 8,75,000</td>
-                            <td>₹ 20,00,000</td>
-                            <td>₹ 65,20,000</td>
-                        </tr>
-                        <tr>
-                            <td>PQR Infrastructure</td>
-                            <td>₹ 1,42,35,600</td>
-                            <td>₹ 95,45,000</td>
-                            <td>₹ 18,50,000</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>–</td>
-                            <td>45</td>
-                            <td>₹ 15,25,000</td>
-                            <td>–</td>
-                            <td>₹ 95,45,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Top-Up MIS Report</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+器的            background-color: white;
+            margin: 20px;
+            color: black;
+        }
+        h2 {
+            color: darkblue;
+            margin-top: 30px;
+        }
+        .kpi-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .kpi-card {
+            width: 200px;
+            height: 200px;
+            border: 3px solid darkblue;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #e6f2ff; /* Light blue background for all 3 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .kpi-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .kpi-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: darkblue;
+        }
+        .main-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .left-column {
+            flex: 3;
+            min-width: 300px;
+        }
+        .right-column {
+            flex: 2;
+            min-width: 300px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+            color: darkblue;
+        }
+        .number {
+            text-align: right;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .entry-row input {
+            width: 100%;
+            border: none;
+            text-align: right;
+            padding: 8px;
+            font-weight: normal;
+        }
+        .total-input {
+            text-align: right;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .kpi-container {
+                gap: 30px;
+            }
+            .kpi-card {
+                width: 160px;
+                height: 160px;
+            }
+            .kpi-value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="kpi-container">
+        <div class="kpi-card">
+            <div class="kpi-title">Total Outstanding</div>
+            <div class="kpi-value" contenteditable="true">0.00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-title">Total Unbilled</div>
+            <div class="kpi-value" contenteditable="true">0.00</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-title">Liabilities Payable</div>
+            <div class="kpi-value" contenteditable="true">0.00</div>
         </div>
     </div>
-</div>
 
-<style>
-    .round-buttons-container {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
-    }
-    
-    .round-btn {
-        padding: 10px 25px;
-        border-radius: 25px;
-        border: 2px solid var(--purple);
-        background-color: white;
-        color: var(--purple);
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 14px;
-        min-width: 100px;
-    }
-    
-    .round-btn:hover {
-        background-color: var(--light-purple);
-        transform: translateY(-2px);
-    }
-    
-    .round-btn.active {
-        background-color: var(--purple);
-        color: white;
-    }
-    
-    .additional-metrics {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-    
-    .metric-card {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 10px;
-        padding: 15px;
-        text-align: center;
-        border: 1px solid #dee2e6;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .metric-title {
-        font-size: 12px;
-        color: #6c757d;
-        font-weight: 600;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    
-    .metric-value {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--purple);
-    }
-    
-    .cashflow-table {
-        margin-top: 25px;
-    }
-    
-    .cashflow-table th {
-        background-color: var(--purple);
-        color: white;
-        padding: 12px 8px;
-        font-size: 12px;
-        white-space: nowrap;
-    }
-    
-    .cashflow-table td {
-        padding: 10px 8px;
-        font-size: 12px;
-        border-bottom: 1px solid #dee2e6;
-    }
-    
-    .cashflow-table tr:hover {
-        background-color: #f8f9fa;
-    }
-</style>
-
-<script>
-    function filterData(filter) {
-        // Remove active class from all buttons
-        document.querySelectorAll('.round-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        // Add active class to clicked button
-        event.target.classList.add('active');
-        
-        // Here you would typically filter the table data
-        // For now, we'll just log the filter
-        console.log('Filtering by:', filter);
-        
-        // Example filter logic (you would implement actual filtering)
-        const rows = document.querySelectorAll('.cashflow-table tbody tr');
-        rows.forEach(row => {
-            const customerCell = row.cells[0].textContent;
-            let showRow = false;
-            
-            switch(filter) {
-                case 'all':
-                    showRow = true;
-                    break;
-                case 'lt':
-                    showRow = customerCell.includes('L&T');
-                    break;
-                case 'kec':
-                    showRow = customerCell.includes('KEC');
-                    break;
-                case 'other':
-                    showRow = !customerCell.includes('L&T') && !customerCell.includes('KEC');
-                    break;
-            }
-            
-            row.style.display = showRow ? '' : 'none';
-        });
-    }
-    
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = 'none';
-    }
-</script>
+    <div class="main-container">
+        <div class="left-column">
+            <h2>:: Cost Analysis Per Ton</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="number">FTD</th>
+                        <th class="number">MTD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Drilling & Blasting Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Breaking & Loading Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Transportation Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Plant Production Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Maintenance Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr class="bold">
+                        <td>Overall Cost</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>:: Sale per Ton</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="number">FTD</th>
+                        <th class="number">MTD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10mm</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>20mm</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Railway Ballast</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>VSI Sand</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Rivo Sand</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Slurry</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="right-column">
+            <h2>:: Cash Flow</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="number">FTD</th>
+                        <th class="number">MTD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Counter</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Credit</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                    <tr class="bold">
+                        <td>Total</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>:: Today Expected Collection</h2>
+            <table>
+                <tbody>
+                    <tr class="entry-row">
+                        <td contenteditable="true">Party Name / Details</td>
+                        <td class="number"><input type="text" value="0.00" class="total-input"></td>
+                    </tr>
+                    <tr class="entry-row">
+                        <td contenteditable="true"></td>
+                        <td class="number"><input type="text" value="0.00" class="total-input"></td>
+                    </tr>
+                    <tr class="entry-row">
+                        <td contenteditable="true"></td>
+                        <td class="number"><input type="text" value="0.00" class="total-input"></td>
+                    </tr>
+                    <tr class="entry-row">
+                        <td contenteditable="true"></td>
+                        <td class="number"><input type="text" value="0.00" class="total-input"></td>
+                    </tr>
+                    <tr class="entry-row">
+                        <td contenteditable="true"></td>
+                        <td class="number"><input type="text" value="0.00" class="total-input"></td>
+                    </tr>
+                    <tr class="bold">
+                        <td>Total :</td>
+                        <td class="number" contenteditable="true">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
 
     <!-- Modal for Plant Running Hours -->
     <div id="plant-hours-modal" class="modal">
