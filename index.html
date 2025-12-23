@@ -230,25 +230,23 @@
             letter-spacing: 0.5px;
         }
 
-        /* Main Layout - Updated with new sizing */
+        /* Main Layout - FIXED: Proper layout with proper sizing */
         .main-area {
             display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            grid-template-rows: auto;
+            grid-template-columns: 1fr 1.5fr; /* Increased right side for map */
+            grid-template-rows: 1fr;
             gap: 18px;
-            height: 100%;
+            height: 600px; /* Fixed height */
             min-height: 600px;
         }
         .left-stack {
-            display: grid;
-            grid-template-rows: auto;
+            display: flex;
+            flex-direction: column;
             gap: 18px;
-            grid-column: 1;
-            grid-row: 1;
             height: 100%;
         }
 
-        /* Updated Map positioning - Increased by 30% */
+        /* Map positioning - Increased by 40% */
         .map-container {
             border-radius: 12px;
             overflow: hidden;
@@ -257,11 +255,8 @@
             flex-direction: column;
             cursor: pointer;
             border: 1px solid var(--border);
-            grid-column: 2;
-            grid-row: 1;
-            align-self: start;
-            height: 520px;
             width: 100%;
+            height: 600px;
         }
         .map-header {
             background: linear-gradient(90deg, #1e293b, #334155);
@@ -298,7 +293,7 @@
             padding: 20px;
             background: linear-gradient(135deg, rgba(249, 115, 22, 0.05), rgba(249, 115, 22, 0.1));
             position: relative;
-            height: 520px;
+            height: 582px; /* Adjusted to fit */
             display: flex;
             flex-direction: column;
         }
@@ -1223,10 +1218,11 @@
             background-color: rgba(0,0,0,0.02);
         }
         
-        /* Compressor Modal Table Styles */
+        /* Compressor Modal Table Styles - WIDER by 30% */
         .production-table-container {
-            width: 100%;
+            width: 130%; /* Increased by 30% */
             overflow-x: auto;
+            margin-left: -15%; /* Center the increased width */
         }
         
         .production-table-container table {
@@ -1543,7 +1539,7 @@
                 </div>
             </div>
 
-            <!-- Right: Map - Increased by 30% -->
+            <!-- Right: Map - Increased by 40% -->
             <div class="card map-container" onclick="openEnhancedMapModal()">
                 <div class="map-header">
                     <i class="fas fa-map-marked-alt"></i> Live Operations Map
@@ -2570,15 +2566,15 @@
         </div>
     </div>
 
-    <!-- Modal for FTD/MTD MIS with side-by-side reports -->
+    <!-- Modal for FTD/MTD MIS with side-by-side reports - Increased by 40% -->
     <div id="ftd-mtd-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 1400px; width: 95%;">
             <div class="modal-header">
                 <h2><i class="fas fa-chart-line"></i> FTD / MTD MIS Reports</h2>
                 <button class="close-btn" onclick="closeModal('ftd-mtd-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="reports-container">
+                <div class="reports-container" style="transform: scale(1.4); width: 142.86%; margin-left: -21.43%;">
                     <div class="report-card" onclick="openZoomModal('FTD/MTD Report', 'https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-12-16%20at%201.47.45%20PM.jpeg')">
                         <div class="report-header">FTD/MTD Report</div>
                         <img src="https://raw.githubusercontent.com/bimal-bp/Live_Operation/main/WhatsApp%20Image%202025-12-16%20at%201.47.45%20PM.jpeg" alt="FTD/MTD Report" class="report-image">
@@ -2590,6 +2586,7 @@
                                 <h3 style="color: #1e3a8a; margin-bottom: 10px;">Target Wise Performance Dashboard</h3>
                                 <p style="color: #666; font-size: 0.9rem;">Comprehensive performance analysis across all operations</p>
                             </div>
+                            <!-- Target Wise Performance Report Content -->
                             <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4192,9 +4189,9 @@
         </div>
     </div>
 
-    <!-- Modal for Compressor Report with Mine Boulder Production Dashboard -->
+    <!-- Modal for Compressor Report with Mine Boulder Production Dashboard - WIDER by 30% -->
     <div id="compressor-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 1300px; width: 95%;">
             <div class="modal-header">
                 <h2><i class="fas fa-compress-arrows-alt"></i> Mine Boulder Production Dashboard</h2>
                 <button class="close-btn" onclick="closeModal('compressor-modal')">&times;</button>
